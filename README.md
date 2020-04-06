@@ -118,11 +118,34 @@ Apple Keyboards Keymap
 Custom Keymaps
 --------------
 
+You can use the configuration page to optionally upload a custom keymap JSON file. The file has to define an array of input key filters and output keys in the following format:
+
+```json
+[ 
+  [input-modifier-mask, input-key-scancode, output-modifier-mask, output-key-scancode],
+  ...
+]
+```
+
+For instance a file such as this:
+
+```json
+[ 
+  [null, "0x35", null, "0x64"],
+  [null, "0x64", null, "0x35"]
+]
+```
+
+will swap the following keys: **KEY_GRAVE - 0x35 (Keyboard ` and ~)** to **KEY_102ND 0x64 (Keyboard Non-US \ and |)**
+
+The optional ***-modifier-mask** can be used to filter the *Ctrl*, *Shift* and *Alt* special key combinations if needed. If not used, you set it to *null* (as in the above example).
+
+You can refer to [this](https://github.com/samartzidis/RaspiKey/blob/master/keymaps/usb_hid_keys.h) document to find out the HID scan codes of specific keys.
+
+Examples:
 - A Keymap for the **German** Apple keyboard versions so that all keys work as expected is available [here](https://raw.githubusercontent.com/samartzidis/RaspiKey/master/keymaps/de-keymap.json).
 
 - A Keymap for the **UK** and **International English** versions is [here](https://raw.githubusercontent.com/samartzidis/RaspiKey/master/keymaps/en-uk-keymap.json). This keymap maps the <kbd>`</kbd> key to the key below <kbd>Esc</kbd> and then assigns it to the Windows <kbd>Menu ▤</kbd> key, that Apple keyboards don't have.
-
-
 
 Planned Futures
 ---------------
