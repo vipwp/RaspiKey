@@ -145,7 +145,7 @@ You can refer to [this](https://github.com/samartzidis/RaspiKey/blob/master/keym
 Examples:
 - A Keymap for the **German** Apple keyboard versions so that all keys work as expected is available [here](https://raw.githubusercontent.com/samartzidis/RaspiKey/master/keymaps/de-keymap.json).
 
-- A Keymap for the **UK** and **International English** versions is [here](https://raw.githubusercontent.com/samartzidis/RaspiKey/master/keymaps/en-uk-keymap.json). This keymap maps the <kbd>`</kbd> key to the key below <kbd>Esc</kbd> and then assigns it to the Windows <kbd>Menu ▤</kbd> key, that Apple keyboards don't have.
+- A Keymap for the **UK** and **International English** versions is [here](https://raw.githubusercontent.com/samartzidis/RaspiKey/master/keymaps/en-uk-keymap.json). This keymap swaps the <kbd>`</kbd> key with the key below <kbd>Esc</kbd>.
 
 Planned Futures
 ---------------
