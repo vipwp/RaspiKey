@@ -40,7 +40,7 @@ Setting up a new RaspiKey Device
 4. Run Etcher to write the **...-raspbian-stretch-lite-headless.xz** image to the SD card.
 5. Open the downloaded **raspikey.zip** file and copy all of its contents (setup, start.sh) directly to the the SD card. The SD card should appear on Windows as a drive named **boot**.
 6. Now insert the SD card to the “Raspberry Pi Zero W” device and connect it to the PC using just the middle micro-USB port (labelled “USB” in tiny white letters).
-7. The Pi will boot and continue its setup. This process will last about 3-4 minutes. You will be able to tell when it's finished when the Raspberry Pi's **green led goes off** (it stays solid green during setup). Once that happens, unplug it from the PC's USB port.
+7. The Pi will boot and continue its setup. This process lasts about 5-6 minutes. You will be able to tell when it's finished when the Raspberry Pi's **green led goes off** (it stays solid green during setup). Once that happens, unplug it from the PC's USB port.
 8. Your new RaspiKey device is now fully configured and ready to use.
 
 RaspiKey Use
