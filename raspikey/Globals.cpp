@@ -26,23 +26,7 @@ using namespace std;
 
 namespace Globals
 {	
-	char g_szModuleDir[PATH_MAX];	
-
-	//DevDesc g_devDesc[13] = { 
-	//	{0x05ac, 0x0208, ModelId::A1314},
-	//	{0x05ac, 0x0209, ModelId::A1314},
-	//	{0x05ac, 0x020a, ModelId::A1314},
-	//	{0x05ac, 0x022c, ModelId::A1314},
-	//	{0x05ac, 0x022d, ModelId::A1314},
-	//	{0x05ac, 0x022e, ModelId::A1314},
-	//	{0x05ac, 0x0239, ModelId::A1314},
-	//	{0x05ac, 0x023A, ModelId::A1314},
-	//	{0x05ac, 0x023B, ModelId::A1314},
-	//	{0x05ac, 0x0255, ModelId::A1314},
-	//	{0x05ac, 0x0256, ModelId::A1314},
-	//	{0x05ac, 0x0257, ModelId::A1314},
-	//	{0x004c, 0x0267, ModelId::A1644}
-	//};
+	char g_szModuleDir[PATH_MAX];
 
 	string FormatBuffer(const uint8_t* const buf, size_t len)
 	{
@@ -173,67 +157,5 @@ namespace Globals
 			return false;
 
 		return true;
-	}
-
-	/*
-	bool GetInputDeviceInfo(const char* const szDeviceName, int& vid, int& pid, ModelId& modelId)
-	{
-		ifstream ifs;
-		string strLine;
-
-		const char* const szDevsPath = "/proc/bus/input/devices";
-		ifs.open(szDevsPath);
-		if (!ifs.is_open())
-		{
-			ErrorMsg("Failed to open %s", szDevsPath);
-			return false;
-		}
-
-		const regex regexVidPid("^I:.*Vendor=([0-9a-fA-F]+)\\s+Product=([0-9a-fA-F]+).*", regex::ECMAScript | regex::icase);
-		const regex regexName("^N:.*Name=\"([^\"]+)\"*", regex::ECMAScript | regex::icase);
-
-		while (getline(ifs, strLine))
-		{
-			smatch matches;
-			if (std::regex_search(strLine, matches, regexVidPid))
-			{
-				try
-				{
-					vid = stoi(matches[1].str(), nullptr, 16);
-					pid = stoi(matches[2].str(), nullptr, 16);					
-				}
-				catch (...)
-				{
-					vid = pid = 0;
-				}
-
-				continue;
-			}
-
-			smatch matches2;
-			if (std::regex_search(strLine, matches2, regexName))
-			{
-				string name = matches2[1].str();
-				if (name == szDeviceName)
-				{
-					modelId = Globals::ModelId::Unknown;
-					for (uint k = 0; k < sizeof(Globals::g_devDesc) / sizeof(Globals::DevDesc); k++)
-					{
-						if (Globals::g_devDesc[k].Vid == vid && Globals::g_devDesc[k].Pid == pid)
-						{
-							modelId = Globals::g_devDesc[k].Model;
-							break;
-						}
-					}
-
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-	*/
-
-	
+	}		
 }

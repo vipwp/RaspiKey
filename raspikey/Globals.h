@@ -14,7 +14,6 @@
 #include <memory>
 #include <vector>
 #include <linux/limits.h>
-#include "ReportFilter.h"
 
 // Global definitions
 //
@@ -22,12 +21,9 @@
 #define HIDRAW_DEV_PATH "/dev/hidraw0"
 #define HIDG_DEV_PATH "/dev/hidg0"
 
-#define A1314_DEV_NAME "Apple Wireless Keyboard"
-#define A1644_DEV_NAME "Magic Keyboard"
-
 #define LOG_FILE_PATH "/tmp/raspikey.log"
 #define DATA_DIR "/data"
-#define VERSION "1.2.3"
+#define VERSION "1.2.4"
 //
 //
 
@@ -86,25 +82,12 @@ namespace Globals
 		HidRCmdMask = 0x80
 	};
 
-	//enum class ModelId: uint8_t
-	//{
-	//	Unknown = 0, A1314, A1644
-	//};
-
-	//typedef struct DevDesc {
-	//	int Vid;
-	//	int Pid;
-	//	ModelId Model;
-	//} tagDevDesc;
-
 	typedef struct HidgOutputReport
 	{
 		uint8_t ReportId;
 		uint8_t Key;
 	} tagHidgOutputReport;
 
-	//
-	//
 
 	// Global variables
 	//	
@@ -143,8 +126,5 @@ namespace Globals
 	bool FileReadAllText(const std::string& path, std::string& text);
 	bool FileWriteAllText(const std::string& path, const std::string& text);
 	bool DeleteFile(const std::string& path);
-
-	// 
-	//
 }
 

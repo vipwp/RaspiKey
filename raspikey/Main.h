@@ -19,6 +19,8 @@ typedef struct DeviceDescriptors
 	std::string inputEventDevName;
 	std::string inputEventDevPhys;
 	std::string inputEventDevUniq;
+	unsigned short pid;
+	unsigned short vid;
 } tagDeviceDescriptors;
 
 int ForwardingLoop(IReportFilter** prps, int hidRawFd, int hidgFd);

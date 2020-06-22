@@ -135,22 +135,25 @@ void OpenDevicesLoop()
 		// Get the unique identifier (bluetooth address) for opened device
 		string devId = fds.inputEventDevUniq;
 		std::transform(devId.begin(), devId.end(), devId.begin(), ::toupper);
-		InfoMsg("Device unique identifier: %s", devId.c_str());
+		InfoMsg("Device unique identifier: %s, VID: %x, PID: %x", devId.c_str(), fds.vid, fds.pid);
 
-		// Create the correct keyboard device IReportFilter		
-		if (fds.inputEventDevName == A1644_DEV_NAME)
+		// Create the correct keyboard device IReportFilter
+		if((fds.vid == 0x5ac && fds.pid == 0x267) || (fds.vid == 0x4c && fds.pid == 0x267)) // These specifically match the A1644
 		{
 			InfoMsg("Using A1644 report filter");
+
 			g_pReportFilters[0] = new A1644();
 		}
-		else if (fds.inputEventDevName == A1314_DEV_NAME)
+		else if (fds.vid == 0x5ac) // Everything else under Apple vendor ID, Assume A1314
 		{
 			InfoMsg("Using A1314 report filter");
+
 			g_pReportFilters[0] = new A1314();
 		}
-		else
+		else // Everything else is "generic" keyboard
 		{
 			InfoMsg("Using Generic report filter");
+
 			g_pReportFilters[0] = new GenericReportFilter(); 
 		}
 		
@@ -331,6 +334,11 @@ int OpenKbDevice(DeviceDescriptors& fds)
 	char szDevUniq[256] = ""; 
 	ioctl(fds.inputEventFd, EVIOCGUNIQ(sizeof(szDevUniq)), szDevUniq); //Dev BT address
 	fds.inputEventDevUniq = szDevUniq;
+
+	struct input_id deviceId = { 0 };
+	ioctl(fds.inputEventFd, EVIOCGID, &deviceId);
+	fds.vid = deviceId.vendor;
+	fds.pid = deviceId.product;
 
 	int res = ioctl(fds.inputEventFd, EVIOCGRAB, 1);
 	if (res < 0)
