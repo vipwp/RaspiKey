@@ -1,4 +1,4 @@
-### Required libraries for building on the reference Pi device
+### Required libraries on the reference Pi device
 
 * libglib2.0-dev
 * libdbus-1-dev
