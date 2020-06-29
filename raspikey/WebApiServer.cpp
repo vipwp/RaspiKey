@@ -12,15 +12,11 @@
 #include "Logger.h"
 #include "Main.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wconversion"
-#include "json.hpp"
-#pragma GCC diagnostic pop
-
 using namespace std;
 
 WebApiServer::WebApiServer()
 {
+	m_pMainThread = nullptr;
 	BuildRoutes();
 }
 

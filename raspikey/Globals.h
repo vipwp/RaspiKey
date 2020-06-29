@@ -6,14 +6,15 @@
 
 #pragma once
 
-#include <stdint.h>
-#include <stddef.h>
+#include <cstdint>
+#include <cstddef>
 #include <memory.h>
 #include <sys/syslog.h>
 #include <string>
 #include <memory>
 #include <vector>
 #include <linux/limits.h>
+#include "json.hpp"
 
 // Global definitions
 //

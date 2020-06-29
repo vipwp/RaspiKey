@@ -1,0 +1,102 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Configure RaspiKey (Release)",
+            "type": "shell",            
+            "command": "cmake",
+            "args": [
+                "-G'Unix Makefiles'",
+                "-Bbuild/Release",
+                "--no-warn-unused-cli",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE",
+                "-DCMAKE_BUILD_TYPE:STRING=MinSizeRel",
+                "-DCMAKE_C_COMPILER:FILEPATH=C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-gcc.exe", 
+                "-DCMAKE_CXX_COMPILER:FILEPATH=C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-g++.exe",
+                "-DCMAKE_TOOLCHAIN_FILE:FILEPATH=${workspaceRoot}/toolchain.cmake",
+                "-H${workspaceRoot}"     
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "dependsOn": [ ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Configure RaspiKey (Debug)",
+            "type": "shell",            
+            "command": "cmake",
+            "args": [
+                "-G'Unix Makefiles'",
+                "-Bbuild/Debug",
+                "--no-warn-unused-cli",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE",
+                "-DCMAKE_BUILD_TYPE:STRING=MinSizeRel",
+                "-DCMAKE_C_COMPILER:FILEPATH=C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-gcc.exe", 
+                "-DCMAKE_CXX_COMPILER:FILEPATH=C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-g++.exe",
+                "-DCMAKE_TOOLCHAIN_FILE:FILEPATH=${workspaceRoot}/toolchain.cmake",
+                "-H${workspaceRoot}"     
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "dependsOn": [ ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Build RaspiKey (Debug)",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "cmake --build ${workspaceRoot}/build/Debug --config Debug --target all -- -j 10",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [ "Configure RaspiKey (Debug)" ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Build RaspiKey (Release)",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "cmake --build ${workspaceRoot}/build/Release --config MinSizeRel --target all -- -j 10",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [ "Configure RaspiKey (Release)" ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "if( Test-Path ${workspaceRoot}/build ) { del -Recurse -Force ${workspaceRoot}/build }",
+            "problemMatcher": [ ]
+        },
+        {
+            "label": "Build UI",
+            "type": "shell",
+            "command": "yarn install; yarn build",
+            "options": {
+                "cwd": "${workspaceRoot}/ui"
+            },
+            "problemMatcher": [ ]
+        },
+        {
+            "label": "Build (Release)",
+            "type": "shell",
+            "command": "del -Recurse -Force ${workspaceRoot}/setup/setup/html -ErrorAction Ignore;Copy-Item -Recurse -Force -Path ${workspaceRoot}/ui/dist ${workspaceRoot}/setup/setup/html;Copy-Item -Force -Path ${workspaceRoot}/build/Release/raspikey ${workspaceRoot}/setup/setup;Compress-Archive -Force -CompressionLevel Optimal -Path ${workspaceRoot}/setup/* ${workspaceRoot}/build/raspikey.zip",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "dependsOn": [ "Build RaspiKey (Release)", "Build UI" ],
+            "problemMatcher": [ ]
+        }
+    ]
+}

@@ -5,20 +5,20 @@
 //
 
 #include <fcntl.h>
-#include <stdio.h>
+#include <cstdio>
 #include <unistd.h>
 #include <memory.h>
 #include <linux/input.h>
 #include <string>      
 #include <iostream> 
 #include <sstream>
-#include <stdint.h>
-#include <stddef.h>
+#include <cstdint>
+#include <cstddef>
 #include <sys/select.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <algorithm>
-#include <signal.h>
+#include <csignal>
 #include <tuple>
 #include <libgen.h>
 #include <sys/time.h>
@@ -47,18 +47,16 @@ int main(int argc, char** argv)
 	readlink("/proc/self/exe", Globals::g_szModuleDir, sizeof(Globals::g_szModuleDir));
 	dirname(Globals::g_szModuleDir); //strip last component from path
 
-	InfoMsg(Globals::FormatString("System uptime: %lu", Globals::GetUptime()).c_str());
+	InfoMsg(Globals::FormatString("System uptime: %lu", Globals::GetUptime()).c_str());	
 
-	struct stat info;
-	if (stat(DATA_DIR, &info) != 0)
+	struct stat info{};
+	if (!stat(DATA_DIR, &info) == 0 || !S_ISDIR(info.st_mode))
 	{
-		ErrorMsg("cannot access data directory %s", DATA_DIR);
-		return -1;
-	}
-	if (!(info.st_mode & S_IFDIR))
-	{
-		ErrorMsg("data directory %s is not a directory", DATA_DIR);
-		return -1;
+		if (system("mkdir -p " DATA_DIR) != 0)
+		{
+			ErrorMsg("cannot access data directory %s", DATA_DIR);
+			return -1;
+		}
 	}
 
 	if (!StartServices())
@@ -456,6 +454,11 @@ void SetSettings(const std::string& devId, const std::string& json)
 	if (!Globals::FileWriteAllText(path, json))
 		throw runtime_error("Failed to write device settings file");
 }
+
+// Dummy methods to avoid static linking issues with libsystemd.a
+extern "C" int sd_listen_fds(int unset_environment) { return 0;  }
+extern "C" int sd_is_socket(int fd, int family, int type, int listening) { return 0; }
+
 
 
 

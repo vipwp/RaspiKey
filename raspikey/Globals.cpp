@@ -5,8 +5,8 @@
 //
 
 #include "Globals.h"
-#include <stdint.h>
-#include <stdio.h>
+#include <cstdint>
+#include <cstdio>
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -19,8 +19,6 @@
 #include <algorithm>
 #include "Logger.h"
 #include <regex>
-#include "json.hpp"
-
 
 using namespace std;
 

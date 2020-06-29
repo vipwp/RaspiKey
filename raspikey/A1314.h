@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 #include "ReportFilter.h"
 #include "A1644.h"
 

@@ -8,7 +8,6 @@
 
 #include "ReportFilter.h"
 #include <string>
-#include <vector>
 
 class GenericReportFilter : public IReportFilter
 {

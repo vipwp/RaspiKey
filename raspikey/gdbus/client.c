@@ -21,6 +21,10 @@
  *
  */
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wint-conversion"
+#pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -1426,3 +1430,5 @@ gboolean g_dbus_client_set_proxy_handlers(GDBusClient *client,
 
 	return TRUE;
 }
+
+#pragma GCC diagnostic pop

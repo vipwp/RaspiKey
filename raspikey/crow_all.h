@@ -1,5 +1,9 @@
 #pragma once
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#pragma GCC diagnostic ignored "-Wshift-count-overflow"
+
 #include <stdio.h>
 #include <string.h>
 #include <string>
@@ -9737,9 +9741,9 @@ namespace crow
     using SimpleApp = Crow<>;
 }
 
-
-
 #pragma once
+
+#pragma GCC diagnostic pop
 
 
 

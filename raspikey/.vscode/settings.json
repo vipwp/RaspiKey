@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "cstdint": "cpp",
+        "xstring": "cpp",
+        "thread": "cpp",
+        "algorithm": "cpp"
+    }
+}
