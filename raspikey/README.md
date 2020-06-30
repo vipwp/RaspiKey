@@ -5,7 +5,8 @@
 
 ### Required on the Windows 10 build node
 
-* VSCode, cmake 3.17+, nodejs v10.16.3+, yarn 1.9.2+.
+* VSCode with extensions: Task Explorer, CMake Tools, CMake, C/C++.
+* cmake 3.17+, nodejs v10.16.3+, yarn 1.9.2+.
 * GCC 6.3 ARM cross compiler [toolchain](https://github.com/samartzidis/RaspiKey/releases/download/raspberry-gcc6.3.0-r5/raspberry-gcc6.3.0-r5.exe).
 * NFS export / filesystem from the reference Pi device and mount it on the Windows build node.<br/>
     On the Pi node:
