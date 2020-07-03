@@ -31,6 +31,7 @@ target_link_libraries(raspikey
 	R:/usr/lib/arm-linux-gnueabihf/libboost_system.a
 )
 
-#add_custom_command(TARGET raspikey POST_BUILD
-#    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:raspikey> ../out/raspikey
-#)
+# Copy executable to the Pi reference device for testing
+add_custom_command(TARGET raspikey POST_BUILD
+   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:raspikey> R:/home/pi/raspikey
+)

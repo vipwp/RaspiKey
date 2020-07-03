@@ -4,5 +4,6 @@
         "xstring": "cpp",
         "thread": "cpp",
         "algorithm": "cpp"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
