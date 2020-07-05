@@ -46,7 +46,7 @@ RaspiKey Use
 ------------
 
 1. Plug RaspiKey to a PC.
-2. Wait for about 10 seconds for it to start and open Chrome or Firefox at **[http://169.254.1.1](http://169.254.1.1)**. 
+2. Wait for about 10 seconds for it to start and open Chrome or Firefox at **[http://169.254.1.1](http://169.254.1.1)**
 3. Use the configuration page to discover and connect a Bluetooth keyboard to it. Once the keyboard is connected, it will be usable on this PC directly or on anywhere else you plug RaspiKey to. You do not need to reconfigure RaspiKey to plug it in and use it elsewhere.
 
 
