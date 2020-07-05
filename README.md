@@ -34,20 +34,19 @@ Hardware and Software Requirements
 Setting up a new RaspiKey Device
 --------------------------------
 
-1. Download [Apple Bonjour](https://developer.apple.com/bonjour/) and install it on Windows. The latest 32-bit and 64-bit versions are available [here](https://github.com/samartzidis/RaspiKey/tree/master/utilities).
-2. Download and install [Etcher](https://etcher.io/).
-3. Download the latest RaspiKey release **raspikey.zip** and the latest Raspbian headless release **...-raspbian-stretch-lite-headless.xz** from [here](https://github.com/samartzidis/RaspiKey/releases).
-4. Run Etcher to write the **...-raspbian-stretch-lite-headless.xz** image to the SD card.
-5. Open the downloaded **raspikey.zip** file and copy all of its contents (setup, start.sh) directly to the the SD card. The SD card should appear on Windows as a drive named **boot**.
-6. Now insert the SD card to the “Raspberry Pi Zero W” device and connect it to the PC using just the middle micro-USB port (labelled “USB” in tiny white letters).
-7. The Pi will boot and continue its setup. This process lasts about 5-6 minutes. You will be able to tell when it's finished when the Raspberry Pi's **green led goes off** (it stays solid green during setup). Once that happens, unplug it from the PC's USB port.
-8. Your new RaspiKey device is now fully configured and ready to use.
+1. Download and install [Etcher](https://etcher.io/).
+2. Download the latest RaspiKey release **raspikey.zip** and the latest Raspbian headless release **...-raspbian-stretch-lite-headless.xz** from [here](https://github.com/samartzidis/RaspiKey/releases).
+3. Use Etcher to write the **...-raspbian-stretch-lite-headless.xz** image to the SD card.
+4. Open the **raspikey.zip** file and copy all of its contents (raspikey, start.sh) directly to the the SD card. The SD card should appear on Windows as a drive named **boot**.
+5. Now insert the SD card to the “Raspberry Pi Zero W” device and connect it to the PC using just the middle micro-USB port (labelled “USB” in tiny white letters).
+6. The Pi will boot and continue its setup. This process lasts about 5-6 minutes. You will be able to tell when it's finished when the Raspberry Pi's **green led goes off** (it stays solid green during setup). Once that happens, unplug it from the PC's USB port.
+7. Your new RaspiKey device is now fully configured and ready to use.
 
 RaspiKey Use
 ------------
 
 1. Plug RaspiKey to a PC.
-2. Wait for about 10 seconds for it to start and open Chrome or Firefox at **[http://raspikey.local](http://raspikey.local)**. 
+2. Wait for about 10 seconds for it to start and open Chrome or Firefox at **[http://169.254.1.1](http://169.254.1.1)**. 
 3. Use the configuration page to discover and connect a Bluetooth keyboard to it. Once the keyboard is connected, it will be usable on this PC directly or on anywhere else you plug RaspiKey to. You do not need to reconfigure RaspiKey to plug it in and use it elsewhere.
 
 

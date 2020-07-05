@@ -52,14 +52,12 @@ EOT
 
 # Configure raspikey_usb.service and libcomposite device to be available on first boot
 #
-echo "Configuring raspikey libcomposite device..."
-
-cp $scriptDir/raspikey_usb /boot/raspikey/raspikey_usb
-chmod +x /boot/raspikey/raspikey_usb
-
+echo "Configuring raspikey_usb.service..."
+chmod +x $scriptDir/raspikey_usb
 cp $scriptDir/raspikey_usb.service /etc/systemd/system/
 systemctl enable raspikey_usb.service
 
+echo "Configuring raspikey libcomposite device..."
 echo "dtoverlay=dwc2" | cat >> /boot/config.txt
 echo "dtoverlay=pi3-disable-wifi" | cat >> /boot/config.txt
 echo "dwc2" | cat >> /etc/modules
@@ -68,14 +66,9 @@ echo "libcomposite" | cat >> /etc/modules
 # Configure the raspikey.service
 #
 echo "Configuring raspikey.service..."
-
+chmod +x $scriptDir/raspikey
 cp $scriptDir/raspikey.service /etc/systemd/system/
 systemctl enable raspikey.service
-
-mkdir /boot/raspikey
-cp -r $scriptDir/html /boot/raspikey
-cp $scriptDir/raspikey /boot/raspikey
-chmod ug+x /boot/raspikey/raspikey
 
 # Setup tmpfs /data filesystem
 #
@@ -128,7 +121,6 @@ rm /var/swap
 rm -fr /opt
 
 # Delete the setup files
-rm -fr /boot/setup || true
 rm -f /boot/start.sh || true
 
 # Clear history

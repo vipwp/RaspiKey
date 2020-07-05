@@ -100,7 +100,7 @@
         {
             "label": "Build (Release)",
             "type": "shell",
-            "command": "del -Recurse -Force ${workspaceRoot}/setup/setup/html -ErrorAction Ignore;Copy-Item -Recurse -Force -Path ${workspaceRoot}/ui/dist ${workspaceRoot}/setup/setup/html;Copy-Item -Force -Path ${workspaceRoot}/build/Release/raspikey ${workspaceRoot}/setup/setup;Compress-Archive -Force -CompressionLevel Optimal -Path ${workspaceRoot}/setup/* ${workspaceRoot}/build/raspikey.zip",
+            "command": "del -Recurse -Force ${workspaceRoot}/setup/raspikey/html -ErrorAction Ignore;Copy-Item -Recurse -Force -Path ${workspaceRoot}/ui/dist ${workspaceRoot}/setup/raspikey/html;Copy-Item -Force -Path ${workspaceRoot}/build/Release/raspikey ${workspaceRoot}/setup/raspikey;Compress-Archive -Force -CompressionLevel Optimal -Path ${workspaceRoot}/setup/* ${workspaceRoot}/build/raspikey.zip",
             "options": {
                 "cwd": "${workspaceRoot}"
             },

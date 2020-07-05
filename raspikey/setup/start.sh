@@ -1,3 +1,3 @@
-cd /boot/setup
+cd /boot/raspikey
 ./setup.sh
 
