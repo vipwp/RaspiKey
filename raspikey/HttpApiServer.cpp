@@ -4,7 +4,8 @@
 // compiled or non-compiled form without the author's written permission.
 //
 
-#include "WebApiServer.h"
+#include "HttpApiServer.h"
+
 #include <thread>
 #include <chrono>
 #include "bluetooth/bt.h"
@@ -14,33 +15,33 @@
 
 using namespace std;
 
-WebApiServer::WebApiServer()
+HttpApiServer::HttpApiServer()
 {
 	m_pMainThread = nullptr;
 	BuildRoutes();
 }
 
-WebApiServer::~WebApiServer()
+HttpApiServer::~HttpApiServer()
 {
 
 }
 
-void WebApiServer::MainThread()
+void HttpApiServer::MainThread()
 {
 	m_crowApp.port(80).run();
 
 	m_pMainThread = nullptr;
 }
 
-void WebApiServer::Start()
+void HttpApiServer::Start()
 {
 	if (m_pMainThread)
 		return;
 
-	m_pMainThread = new thread(&WebApiServer::MainThread, this);
+	m_pMainThread = new thread(&HttpApiServer::MainThread, this);
 }
 
-void WebApiServer::Stop()
+void HttpApiServer::Stop()
 {
 	m_crowApp.stop();
 
@@ -50,7 +51,7 @@ void WebApiServer::Stop()
 	m_pMainThread = nullptr;
 }
 
-void WebApiServer::BuildRoutes()
+void HttpApiServer::BuildRoutes()
 {
 	CROW_ROUTE(m_crowApp, "/") ([](const crow::request& req, crow::response& res)
 	{

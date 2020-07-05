@@ -26,7 +26,7 @@
 #include "ReportFilter.h"
 #include "A1644.h"
 #include "A1314.h"
-#include "WebApiServer.h"
+#include "HttpApiServer.h"
 #include "bluetooth/bt.h"
 #include "Logger.h"
 #include "GenericReportFilter.h"
@@ -35,7 +35,7 @@
 
 using namespace std;
 
-WebApiServer g_WebApiServer;
+HttpApiServer g_ApiServer;
 bool g_ExitRequested = false;
 IReportFilter* g_pReportFilters[3] = { nullptr };
 
@@ -87,7 +87,7 @@ void SignalHandler(int signo)
 bool StartServices()
 {
 	// Start the Web Api server
-	g_WebApiServer.Start();
+	g_ApiServer.Start();
 
 	// Start the bluetooth
 	try
@@ -217,7 +217,7 @@ void StopAllServices()
 	g_ExitRequested = true;
 
 	bluetooth::Stop();
-	g_WebApiServer.Stop();	
+	g_ApiServer.Stop();	
 }
 
 int ForwardingLoop(IReportFilter** prps, int hidRawFd, int hidgFd)

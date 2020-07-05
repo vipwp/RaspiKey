@@ -31,11 +31,11 @@ struct CustomMiddleware
 	}
 };
 
-class WebApiServer
+class HttpApiServer
 {
 public:
-	WebApiServer();
-	~WebApiServer();
+	HttpApiServer();
+	~HttpApiServer();
 
 private:
 	std::thread* m_pMainThread;
