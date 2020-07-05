@@ -122,6 +122,8 @@ rm -fr /opt
 
 # Delete the setup files
 rm -f /boot/start.sh || true
+rm -f $scriptDir/setup.sh || true
+rm -f $scriptDir/readonly-convert.sh || true
 
 # Clear history
 history -c
