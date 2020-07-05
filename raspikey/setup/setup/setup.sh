@@ -10,12 +10,10 @@ if [ $(id -u) -ne 0 ]; then
 	exit 1
 fi
 
-# Turn on RPi led permanently so that we know when it shut down at the end
-echo 0 | sudo tee /sys/class/leds/led0/brightness > /dev/null
-
 echo "Running $scriptPath..."
 
 # Error handling
+# 
 error()
 {
   local parent_lineno="$1"
@@ -31,7 +29,11 @@ error()
 }
 trap 'error ${LINENO}' ERR
 
+# Turn on RPi led permanently so that we know when it shut down at the end
+echo 0 | sudo tee /sys/class/leds/led0/brightness > /dev/null
+
 # Set hostname to raspikey
+#
 echo "Configuring hostname..."
 echo "raspikey" | cat > /etc/hostname
 sed -Ei 's/^127\.0\.1\.1.*$/127.0.1.1\traspikey/' /etc/hosts
@@ -40,6 +42,7 @@ sed -Ei 's/^127\.0\.1\.1.*$/127.0.1.1\traspikey/' /etc/hosts
 echo "gpu_mem=32" | cat >> /boot/config.txt
 
 # Disable ipv6
+#
 cat <<EOT >> /etc/sysctl.d/99-sysctl.conf
 
 net.ipv6.conf.all.disable_ipv6 = 1
@@ -48,36 +51,47 @@ net.ipv6.conf.lo.disable_ipv6 = 1
 EOT
 
 # Configure raspikey_usb.service and libcomposite device to be available on first boot
+#
 echo "Configuring raspikey libcomposite device..."
+
 cp $scriptDir/raspikey_usb /usr/sbin/raspikey_usb
 chmod +x /usr/sbin/raspikey_usb
+
 cp $scriptDir/raspikey_usb.service /etc/systemd/system/
 systemctl enable raspikey_usb.service
+
 echo "dtoverlay=dwc2" | cat >> /boot/config.txt
 echo "dtoverlay=pi3-disable-wifi" | cat >> /boot/config.txt
 echo "dwc2" | cat >> /etc/modules
 echo "libcomposite" | cat >> /etc/modules
 
 # Configure the raspikey.service
+#
 echo "Configuring raspikey.service..."
+
 cp $scriptDir/raspikey.service /etc/systemd/system/
 systemctl enable raspikey.service
+
 mkdir /raspikey
 cp -r $scriptDir/html /raspikey
 cp $scriptDir/raspikey /raspikey
 chmod ug+x /raspikey/raspikey
 
 # Configure the raspikey_datafs.service
+#
 echo "Configuring raspikey_datafs.service..."
+
 cp $scriptDir/raspikey_datafs.service /etc/systemd/system/
 systemctl enable raspikey_datafs.service
 
 # Setup tmpfs /data filesystem
+#
 mkdir /data
 echo -e "\ntmpfs /data tmpfs nodev,nosuid 0 0" | cat >> /etc/fstab
 mount /data
 
 # Redirect the standard /var/lib/bluetooth data dir to /data
+#
 service bluetooth stop
 [ ! -d /var/lib/bluetooth ] || rm -fr /var/lib/bluetooth
 ln -s /data /var/lib/bluetooth

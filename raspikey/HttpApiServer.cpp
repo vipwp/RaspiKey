@@ -5,7 +5,6 @@
 //
 
 #include "HttpApiServer.h"
-
 #include <thread>
 #include <chrono>
 #include "bluetooth/bt.h"
@@ -93,8 +92,7 @@ void HttpApiServer::BuildRoutes()
 		}
 	});
 
-	CROW_ROUTE(m_crowApp, "/save-data")
-		([]()
+	CROW_ROUTE(m_crowApp, "/save-data") ([]()
 	{
 		int retval = system("/bin/mount -o remount,rw /boot && /bin/tar cpjf /boot/data.tar.bz2 -C /data . && /bin/mount -o remount,ro /boot");
 		if(retval)
@@ -103,8 +101,7 @@ void HttpApiServer::BuildRoutes()
 		return crow::response(200);
 	});
 
-	CROW_ROUTE(m_crowApp, "/delete-data")
-		([]()
+	CROW_ROUTE(m_crowApp, "/delete-data") ([]()
 	{
 
 		int retval = system(
@@ -122,8 +119,7 @@ void HttpApiServer::BuildRoutes()
 		return crow::response(200);
 	});
 
-	CROW_ROUTE(m_crowApp, "/info")
-		([]()
+	CROW_ROUTE(m_crowApp, "/info") ([]()
 	{
 		nlohmann::json jobj;
 
@@ -133,8 +129,7 @@ void HttpApiServer::BuildRoutes()
 		return crow::response(200, jobj.dump());
 	});
 
-	CROW_ROUTE(m_crowApp, "/log")
-		([]()
+	CROW_ROUTE(m_crowApp, "/log") ([]()
 	{
 		string strLog;
 		ifstream logfile;
@@ -150,35 +145,7 @@ void HttpApiServer::BuildRoutes()
 		return crow::response(200, strLog);
 	});
 
-	//CROW_ROUTE(m_crowApp, "/bt")
-	//	([](const crow::request& req)
-	//{
-	//	char* val = req.url_params.get("v");
-	//	try
-	//	{
-	//		if (val == nullptr)
-	//		{
-	//			nlohmann::json jobj;
-
-	//			jobj["v"] = bluetooth::IsStarted() ? "on" : "off";
-
-	//			return crow::response(200, jobj.dump());
-	//		}
-	//		else if (strcmp(val, "on") == 0)
-	//			bluetooth::Start();
-	//		else if (strcmp(val, "off") == 0)
-	//			bluetooth::Stop();
-	//	}
-	//	catch (exception& ex)
-	//	{
-	//		return crow::response(500, ex.what());
-	//	}
-
-	//	return crow::response(200);
-	//});
-
-	CROW_ROUTE(m_crowApp, "/bt/discovery")
-		([](const crow::request& req)
+	CROW_ROUTE(m_crowApp, "/bt/discovery") ([](const crow::request& req)
 	{
 		char* val = req.url_params.get("v");
 		try
@@ -208,8 +175,7 @@ void HttpApiServer::BuildRoutes()
 		return crow::response(200);
 	});
 
-	CROW_ROUTE(m_crowApp, "/bt/devices")
-		([]()
+	CROW_ROUTE(m_crowApp, "/bt/devices") ([]()
 	{
 		auto jarray = nlohmann::json::array();
 		auto devs = bluetooth::GetDevices();
@@ -262,8 +228,7 @@ void HttpApiServer::BuildRoutes()
 	//	return crow::response(200, "{}");
 	//}
 
-	CROW_ROUTE(m_crowApp, "/bt/info")
-		([](const crow::request& req)
+	CROW_ROUTE(m_crowApp, "/bt/info") ([](const crow::request& req)
 	{
 		try
 		{
@@ -298,8 +263,7 @@ void HttpApiServer::BuildRoutes()
 		}
 	});
 
-	CROW_ROUTE(m_crowApp, "/bt/begin-pair")
-		([](const crow::request& req)
+	CROW_ROUTE(m_crowApp, "/bt/begin-pair") ([](const crow::request& req)
 	{
 		try
 		{
@@ -322,8 +286,7 @@ void HttpApiServer::BuildRoutes()
 		}
 	});
 
-	CROW_ROUTE(m_crowApp, "/bt/end-pair")
-		([](const crow::request& req)
+	CROW_ROUTE(m_crowApp, "/bt/end-pair") ([](const crow::request& req)
 	{
 		try
 		{
@@ -339,8 +302,7 @@ void HttpApiServer::BuildRoutes()
 		}
 	});
 
-	CROW_ROUTE(m_crowApp, "/bt/remove")
-		([](const crow::request& req)
+	CROW_ROUTE(m_crowApp, "/bt/remove") ([](const crow::request& req)
 	{
 		char* val = req.url_params.get("v");
 		try
@@ -359,8 +321,7 @@ void HttpApiServer::BuildRoutes()
 		return crow::response(200);
 	});
 
-	CROW_ROUTE(m_crowApp, "/bt/connect")
-		([](const crow::request& req)
+	CROW_ROUTE(m_crowApp, "/bt/connect") ([](const crow::request& req)
 	{
 		char* val = req.url_params.get("v");
 		try
@@ -379,8 +340,7 @@ void HttpApiServer::BuildRoutes()
 		return crow::response(200);
 	});
 
-	CROW_ROUTE(m_crowApp, "/bt/disconnect")
-		([](const crow::request& req)
+	CROW_ROUTE(m_crowApp, "/bt/disconnect") ([](const crow::request& req)
 	{
 		char* val = req.url_params.get("v");
 		try
@@ -399,8 +359,7 @@ void HttpApiServer::BuildRoutes()
 		return crow::response(200);
 	});
 
-	CROW_ROUTE(m_crowApp, "/bt/trust")
-		([](const crow::request& req)
+	CROW_ROUTE(m_crowApp, "/bt/trust") ([](const crow::request& req)
 	{
 		char* val = req.url_params.get("v");
 		try
@@ -419,9 +378,7 @@ void HttpApiServer::BuildRoutes()
 		return crow::response(200);
 	});
 
-	CROW_ROUTE(m_crowApp, "/keymap")
-		.methods("GET"_method, "POST"_method, "DELETE"_method, "OPTIONS"_method)
-		([](const crow::request& req)
+	CROW_ROUTE(m_crowApp, "/keymap").methods("GET"_method, "POST"_method, "DELETE"_method, "OPTIONS"_method) ([](const crow::request& req)
 	{
 		try
 		{
@@ -476,9 +433,7 @@ void HttpApiServer::BuildRoutes()
 		}
 	});
 
-	CROW_ROUTE(m_crowApp, "/settings")
-		.methods("POST"_method, "OPTIONS"_method)
-		([](const crow::request& req)
+	CROW_ROUTE(m_crowApp, "/settings").methods("POST"_method, "OPTIONS"_method) ([](const crow::request& req)
 	{
 		try
 		{
