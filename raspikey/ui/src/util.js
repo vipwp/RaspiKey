@@ -17,6 +17,7 @@ class Util {
     waitForMsec = (msec) => { 
         return new Promise(resolve => { setTimeout(() => resolve(), msec)}) 
     };
+
 }
 
 export default new Util();

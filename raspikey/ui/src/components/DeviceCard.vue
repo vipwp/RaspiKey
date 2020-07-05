@@ -11,9 +11,9 @@
     </md-card-header>
 
     <md-card-media style="padding:15px">
-      <img v-if="deviceData.name==='Apple Wireless Keyboard'" src="../images/A1314.png">
-      <img v-else-if="deviceData.name==='Magic Keyboard'" src="../images/A1644.png">
-      <img v-else src="../images/keyboard.png">
+      <img v-if="detectKeyboardModel(deviceData.modalias)==='A1314'" src="../assets/A1314.png">
+      <img v-else-if="detectKeyboardModel(deviceData.modalias)==='A1644'" src="../assets/A1644.png">
+      <img v-else src="../assets/keyboard.png">
     </md-card-media>
 
     <md-card-content>
@@ -72,6 +72,8 @@
 </template>
 
 <script>
+import Util from '../util'
+
 export default {
   name: "DeviceCard",
   props: {
@@ -118,6 +120,15 @@ export default {
     },
     changeSettings: async function() {
       this.setSettingsParent(this.deviceData);
+    },
+    detectKeyboardModel: function(modalias) {
+      modalias = modalias.toLowerCase();
+      if(modalias.indexOf("v004cp0267") !== -1 || modalias.indexOf("v05acp0267") !== -1)
+        return "A1644";
+      else if(modalias.indexOf("v05ac") !== -1)
+        return "A1644";
+      else
+        return null;
     }
   }
 };

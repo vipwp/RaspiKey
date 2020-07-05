@@ -33,7 +33,7 @@
                 "-Bbuild/Debug",
                 "--no-warn-unused-cli",
                 "-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE",
-                "-DCMAKE_BUILD_TYPE:STRING=MinSizeRel",
+                "-DCMAKE_BUILD_TYPE:STRING=Debug",
                 "-DCMAKE_C_COMPILER:FILEPATH=C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-gcc.exe", 
                 "-DCMAKE_CXX_COMPILER:FILEPATH=C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-g++.exe",
                 "-DCMAKE_TOOLCHAIN_FILE:FILEPATH=${workspaceRoot}/toolchain.cmake",
@@ -83,6 +83,15 @@
             "label": "Build UI",
             "type": "shell",
             "command": "yarn install; yarn build",
+            "options": {
+                "cwd": "${workspaceRoot}/ui"
+            },
+            "problemMatcher": [ ]
+        },
+        {
+            "label": "Start UI",
+            "type": "shell",
+            "command": "yarn install; yarn serve",
             "options": {
                 "cwd": "${workspaceRoot}/ui"
             },

@@ -3,8 +3,14 @@
 # Description: usb_gadget configuration script for raspikey_usb device
 #
 
+if [ $(id -u) -ne 0 ]; then
+	echo "$scriptPath must be run as root."
+	exit 1
+fi
+
 if [ -d "/sys/kernel/config/usb_gadget/raspikey" ]
 then
+  echo "Nothing to do. raspikey_usb already configured."
   exit 0
 fi
 
@@ -35,11 +41,11 @@ echo 250 > configs/c.1/MaxPower
 # RNDIS has to be the *FIRST* interface on the composite device
 #
 mkdir -p os_desc
-echo 1       > os_desc/use
-echo 0xcd    > os_desc/b_vendor_code
+echo 1 > os_desc/use
+echo 0xcd > os_desc/b_vendor_code
 echo MSFT100 > os_desc/qw_sign
 mkdir -p functions/rndis.usb0  # network
-echo RNDIS   > functions/rndis.usb0/os_desc/interface.rndis/compatible_id
+echo RNDIS > functions/rndis.usb0/os_desc/interface.rndis/compatible_id
 echo 5162001 > functions/rndis.usb0/os_desc/interface.rndis/sub_compatible_id
 echo "42:63:65:35:18:23" > functions/rndis.usb0/host_addr
 echo "42:63:65:88:43:26" > functions/rndis.usb0/dev_addr
@@ -61,6 +67,13 @@ ln -s functions/hid.usb0 configs/c.1/
 #mkdir -p functions/acm.usb0    # serial
 #ln -s functions/acm.usb0 configs/c.1/
 
-
 udevadm settle -t 5 || :
 ls /sys/class/udc > UDC
+
+# Configure usb0 IPv4 address
+#
+while [ ! $(cat /sys/class/net/usb0/operstate | grep up) ]; do 
+  echo "Waiting for usb0"
+  sleep 1
+done
+ifconfig usb0 169.254.1.1

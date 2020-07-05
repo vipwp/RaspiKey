@@ -6,8 +6,8 @@
 Description=RaspiKey Keyboard HID Device Service
 
 [Service]
-ExecStart=/raspikey/raspikey
-WorkingDirectory=/raspikey/
+ExecStart=/boot/raspikey/raspikey
+WorkingDirectory=/boot/raspikey
 StandardOutput=inherit
 StandardError=inherit
 Restart=always

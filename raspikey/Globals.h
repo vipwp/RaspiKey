@@ -24,7 +24,8 @@
 
 #define LOG_FILE_PATH "/tmp/raspikey.log"
 #define DATA_DIR "/data"
-#define VERSION "1.2.4"
+#define DATA_ARCHIVE "/boot/data.tar.bz2"
+#define VERSION "1.2.5"
 //
 //
 

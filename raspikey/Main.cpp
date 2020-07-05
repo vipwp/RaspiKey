@@ -54,7 +54,23 @@ int main(int argc, char** argv)
 	{
 		if (system("mkdir -p " DATA_DIR) != 0)
 		{
-			ErrorMsg("cannot access data directory %s", DATA_DIR);
+			ErrorMsg("Cannot access data directory %s", DATA_DIR);
+			return -1;
+		}
+	}
+
+	// Restore data directory
+	if (stat(DATA_ARCHIVE, &info) == 0)
+	{
+		InfoMsg("Restoring data directory");
+
+		int retval = system(
+			"/bin/rm -fr " DATA_DIR "/* &&"\
+			"/bin/tar xf " DATA_ARCHIVE " -C " DATA_DIR " .");
+			
+		if(retval)
+		{
+			ErrorMsg("Failed to restore data directory %s, system() call failed with error %d", DATA_DIR, retval);
 			return -1;
 		}
 	}

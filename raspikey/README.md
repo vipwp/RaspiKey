@@ -13,7 +13,7 @@
     ```
     sudo -s
     apt-get install nfs-kernel-server -y
-    echo -e '\n/ *(rw,all_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)' >> /etc/exports
+    echo -e '\n/ *(rw,crossmnt,all_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)' >> /etc/exports
     exportfs -ra
     ```
     On the Windows build node:

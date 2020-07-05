@@ -94,7 +94,11 @@ void HttpApiServer::BuildRoutes()
 
 	CROW_ROUTE(m_crowApp, "/save-data") ([]()
 	{
-		int retval = system("/bin/mount -o remount,rw /boot && /bin/tar cpjf /boot/data.tar.bz2 -C /data . && /bin/mount -o remount,ro /boot");
+		int retval = system(
+			"/bin/mount -o remount,rw /boot &&"\ 
+			"/bin/tar cpjf " DATA_ARCHIVE " -C /data . &&"\
+			"/bin/mount -o remount,ro /boot");
+			
 		if(retval)
 			return crow::response(500, Globals::FormatString("System command failed with exit code %d", retval));
 
@@ -103,12 +107,11 @@ void HttpApiServer::BuildRoutes()
 
 	CROW_ROUTE(m_crowApp, "/delete-data") ([]()
 	{
-
 		int retval = system(
-			"/bin/mount -o remount,rw /boot && "\
-			"rm -f /boot/data.tar.bz2 && "\
-			"/bin/mount -o remount,ro /boot && "\
-			"service bluetooth stop &&"\
+			"/bin/mount -o remount,rw /boot &&"\
+			"/bin/rm -f " DATA_ARCHIVE " &&"\
+			"/bin/mount -o remount,ro /boot &&"\
+			"/usr/sbin/service bluetooth stop &&"\
 			"/bin/rm -fr " DATA_DIR "/*");
 
 		if (retval)

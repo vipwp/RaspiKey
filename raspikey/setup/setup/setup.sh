@@ -54,8 +54,8 @@ EOT
 #
 echo "Configuring raspikey libcomposite device..."
 
-cp $scriptDir/raspikey_usb /usr/sbin/raspikey_usb
-chmod +x /usr/sbin/raspikey_usb
+cp $scriptDir/raspikey_usb /boot/raspikey/raspikey_usb
+chmod +x /boot/raspikey/raspikey_usb
 
 cp $scriptDir/raspikey_usb.service /etc/systemd/system/
 systemctl enable raspikey_usb.service
@@ -72,17 +72,10 @@ echo "Configuring raspikey.service..."
 cp $scriptDir/raspikey.service /etc/systemd/system/
 systemctl enable raspikey.service
 
-mkdir /raspikey
-cp -r $scriptDir/html /raspikey
-cp $scriptDir/raspikey /raspikey
-chmod ug+x /raspikey/raspikey
-
-# Configure the raspikey_datafs.service
-#
-echo "Configuring raspikey_datafs.service..."
-
-cp $scriptDir/raspikey_datafs.service /etc/systemd/system/
-systemctl enable raspikey_datafs.service
+mkdir /boot/raspikey
+cp -r $scriptDir/html /boot/raspikey
+cp $scriptDir/raspikey /boot/raspikey
+chmod ug+x /boot/raspikey/raspikey
 
 # Setup tmpfs /data filesystem
 #
