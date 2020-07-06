@@ -29,7 +29,7 @@ Hardware and Software Requirements
 
 1. A plain [Raspberry Pi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) board.
 2. A 2GB (or bigger) micro SD card.
-3. Access to a modern Windows PC with the Chrome browser. You need this to build your new RaspiKey device and tether a Bluetooth keyboard to it for the first time.
+3. Access to a modern Windows PC with a Web browser. You need this to build your new RaspiKey device and tether a Bluetooth keyboard to it for the first time.
 
 Setting up a new RaspiKey Device
 --------------------------------
@@ -46,14 +46,14 @@ RaspiKey Use
 ------------
 
 1. Plug RaspiKey to a PC.
-2. Wait for about 10 seconds for it to start and open Chrome or Firefox at **[http://169.254.1.1](http://169.254.1.1)**
-3. Use the configuration page to discover and connect a Bluetooth keyboard to it. Once the keyboard is connected, it will be usable on this PC directly or on anywhere else you plug RaspiKey to. You do not need to reconfigure RaspiKey to plug it in and use it elsewhere.
+2. Wait for about 10 seconds for it to start and open your Web browser at **[http://169.254.1.1](http://169.254.1.1)**
+3. Use the displayed configuration page to discover and connect a Bluetooth keyboard to it. Once the keyboard is connected, it will be usable on this PC directly or on anywhere else you plug RaspiKey to. You do not need to reconfigure RaspiKey to plug it in and use it elsewhere.
 
 
 Known Issues
 ------------
 
-*   The battery level indicator does not yet work on the Apple Magic (A1644) keyboard.
+*   The battery level indicator does not work on the Apple Magic (A1644) keyboard.
 *   The Ctrl-LShift-T combination does not work on Apple keyboards, use the Ctrl-RShift-T instead where applicable.
 
 Apple Keyboards Keymap
@@ -146,10 +146,6 @@ Examples:
 
 - A Keymap for the **UK** and **International English** versions is [here](https://raw.githubusercontent.com/samartzidis/RaspiKey/master/keymaps/en-uk-keymap.json). This keymap swaps the <kbd>`</kbd> key with the key below <kbd>Esc</kbd>.
 
-Planned Futures
----------------
-
-*   Support for the full-size Apple Magic keyboard.
 
 ---
 RaspiKey is a free and open-source software effort. If you like it and find it useful, please consider donating
