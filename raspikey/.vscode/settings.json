@@ -3,7 +3,9 @@
         "cstdint": "cpp",
         "xstring": "cpp",
         "thread": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "utility": "cpp"
     },
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "terminal.integrated.shell.windows": "powershell.exe"
 }

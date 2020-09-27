@@ -10,7 +10,7 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-gcc.exe",
+            "compilerPath": "d:/tools/raspberry-gcc/bin/arm-linux-gnueabihf-gcc.exe",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64",
