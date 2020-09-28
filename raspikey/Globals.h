@@ -63,6 +63,7 @@ namespace Globals
 		HidF23 = 0x72,
 		HidF24 = 0x73,
 		HidDel = 0x4c,
+		HidBackspace = 0x2a,
 		HidLeft = 0x50,
 		HidHome = 0x4a,
 		HidRight = 0x4f,
