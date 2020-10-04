@@ -10,11 +10,11 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-gcc.exe",
+            "compilerPath": "/opt/cross-pi-gcc/bin/arm-linux-gnueabihf-gcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64",
-            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "intelliSenseMode": "gcc-x64",
+            "compileCommands": "${workspaceFolder}/build/Debug/compile_commands.json",
             "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],

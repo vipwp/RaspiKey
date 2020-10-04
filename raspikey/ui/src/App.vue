@@ -54,7 +54,7 @@
 
     </md-content>
 
-    <div class="md-caption">RaspiKey, &copy;2019 George Samartzidis.</div> 
+    <div class="md-caption">RaspiKey, &copy;2020 George Samartzidis.</div> 
     <a href="https://github.com/samartzidis/RaspiKey" target="_blank">GitHub</a>
   </div>
 

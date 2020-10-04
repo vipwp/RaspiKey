@@ -45,10 +45,6 @@ append2() {
 	fi
 }
 
-# Remove packages
-apt-get remove -y --force-yes triggerhappy dphys-swapfile fake-hwclock cron logrotate rsyslog
-apt-get -y --force-yes autoremove --purge
-
 # Add fastboot, noswap and/or ro to end of /boot/cmdline.txt
 append2 /boot/cmdline.txt fastboot fastboot
 append2 /boot/cmdline.txt noswap noswap
@@ -58,15 +54,6 @@ append2 /boot/cmdline.txt ro^o^t ro
 rm -rf /var/spool
 ln -s /tmp /var/spool
 
-# Move /var/lib/lightdm and /var/cache/lightdm to /tmp
-rm -rf /var/lib/lightdm
-rm -rf /var/cache/lightdm
-ln -s /tmp /var/lib/lightdm
-ln -s /tmp /var/cache/lightdm
-
-# Make SSH work
-replaceAppend /etc/ssh/sshd_config "^.*UsePrivilegeSeparation.*$" "UsePrivilegeSeparation no"
-
 # Change spool permissions in var.conf
 replace /usr/lib/tmpfiles.d/var.conf "spool\s*0755" "spool 1777"
 
@@ -74,9 +61,6 @@ replace /usr/lib/tmpfiles.d/var.conf "spool\s*0755" "spool 1777"
 touch /tmp/dhcpcd.resolv.conf
 rm /etc/resolv.conf
 ln -s /tmp/dhcpcd.resolv.conf /etc/resolv.conf
-
-# Delete all existing logs
-rm -fr /var/log/*
 
 # Make edits to fstab
 replace /etc/fstab "vfat\s*defaults\s" "vfat    defaults,ro "

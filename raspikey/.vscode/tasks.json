@@ -4,27 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Configure RaspiKey (Release)",
-            "type": "shell",            
-            "command": "cmake",
-            "args": [
-                "-G'Unix Makefiles'",
-                "-Bbuild/Release",
-                "--no-warn-unused-cli",
-                "-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE",
-                "-DCMAKE_BUILD_TYPE:STRING=MinSizeRel",
-                "-DCMAKE_C_COMPILER:FILEPATH=C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-gcc.exe", 
-                "-DCMAKE_CXX_COMPILER:FILEPATH=C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-g++.exe",
-                "-DCMAKE_TOOLCHAIN_FILE:FILEPATH=${workspaceRoot}/toolchain.cmake",
-                "-H${workspaceRoot}"     
-            ],
-            "options": {
-                "cwd": "${workspaceRoot}"
-            },
-            "dependsOn": [ ],
-            "problemMatcher": []
-        },
-        {
             "label": "Configure RaspiKey (Debug)",
             "type": "shell",            
             "command": "cmake",
@@ -34,9 +13,7 @@
                 "--no-warn-unused-cli",
                 "-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE",
                 "-DCMAKE_BUILD_TYPE:STRING=Debug",
-                "-DCMAKE_C_COMPILER:FILEPATH=C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-gcc.exe", 
-                "-DCMAKE_CXX_COMPILER:FILEPATH=C:/SysGCC/raspberry/bin/arm-linux-gnueabihf-g++.exe",
-                "-DCMAKE_TOOLCHAIN_FILE:FILEPATH=${workspaceRoot}/toolchain.cmake",
+                "-DCMAKE_TOOLCHAIN_FILE:FILEPATH=${workspaceRoot}/toolchain-rpi0.cmake",
                 "-H${workspaceRoot}"     
             ],
             "options": {
@@ -45,6 +22,25 @@
             "dependsOn": [ ],
             "problemMatcher": []
         },
+        {
+            "label": "Configure RaspiKey (Release)",
+            "type": "shell",            
+            "command": "cmake",
+            "args": [
+                "-G'Unix Makefiles'",
+                "-Bbuild/Release",
+                "--no-warn-unused-cli",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE",
+                "-DCMAKE_BUILD_TYPE:STRING=MinSizeRel",
+                "-DCMAKE_TOOLCHAIN_FILE:FILEPATH=${workspaceRoot}/toolchain-rpi0.cmake",
+                "-H${workspaceRoot}"     
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "dependsOn": [ ],
+            "problemMatcher": []
+        },        
         {
             "label": "Build RaspiKey (Debug)",
             "type": "shell",
@@ -76,13 +72,13 @@
         {
             "label": "Clean",
             "type": "shell",
-            "command": "if( Test-Path ${workspaceRoot}/build ) { del -Recurse -Force ${workspaceRoot}/build }",
+            "command": "rm -fr ${workspaceRoot}/build",
             "problemMatcher": [ ]
         },
         {
             "label": "Build UI",
             "type": "shell",
-            "command": "yarn install; yarn build",
+            "command": "npm install && npm run build",
             "options": {
                 "cwd": "${workspaceRoot}/ui"
             },
@@ -91,16 +87,16 @@
         {
             "label": "Start UI",
             "type": "shell",
-            "command": "yarn install; yarn serve",
+            "command": "npm install && npm run serve",
             "options": {
                 "cwd": "${workspaceRoot}/ui"
             },
             "problemMatcher": [ ]
         },
         {
-            "label": "Build (Release)",
+            "label": "Pack",
             "type": "shell",
-            "command": "del -Recurse -Force ${workspaceRoot}/setup/raspikey/html -ErrorAction Ignore;Copy-Item -Recurse -Force -Path ${workspaceRoot}/ui/dist ${workspaceRoot}/setup/raspikey/html;Copy-Item -Force -Path ${workspaceRoot}/build/Release/raspikey ${workspaceRoot}/setup/raspikey;Compress-Archive -Force -CompressionLevel Optimal -Path ${workspaceRoot}/setup/* ${workspaceRoot}/build/raspikey.zip",
+            "command": "rm -fr ${workspaceRoot}/setup/raspikey/html && cp -R ${workspaceRoot}/ui/dist ${workspaceRoot}/setup/raspikey/html && cp -f ${workspaceRoot}/build/Release/raspikey ${workspaceRoot}/setup/raspikey && rm -f ${workspaceRoot}/build/raspikey.zip && 7z a -mx=9 ${workspaceRoot}/build/raspikey.zip ${workspaceRoot}/setup/*",
             "options": {
                 "cwd": "${workspaceRoot}"
             },

@@ -13,8 +13,8 @@ if [ $(id -u) -ne 0 ]; then
 	exit 1
 fi
 
-src_url=https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2018-11-15/2018-11-13-raspbian-stretch-lite.zip
-src_img_name=2018-11-13-raspbian-stretch-lite
+src_url=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2020-08-24/2020-08-20-raspios-buster-armhf-lite.zip
+src_img_name=2020-08-20-raspios-buster-armhf-lite
 rootpath=./root
 bootpath=./boot
 

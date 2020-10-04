@@ -9552,9 +9552,15 @@ namespace crow
             return router_.new_rule_dynamic(std::move(rule));
         }
 
+        // template <uint64_t Tag>
+        // auto route(std::string&& rule) -> typename std::result_of<decltype(&Router::new_rule_tagged<Tag>)(Router, std::string&&)>::type
+        // {
+        //     return router_.new_rule_tagged<Tag>(std::move(rule));
+        // }
+
+        // Bug fix (also need to use: -std=c++1y)
         template <uint64_t Tag>
-        auto route(std::string&& rule)
-            -> typename std::result_of<decltype(&Router::new_rule_tagged<Tag>)(Router, std::string&&)>::type
+        auto& route(std::string&& rule)
         {
             return router_.new_rule_tagged<Tag>(std::move(rule));
         }
