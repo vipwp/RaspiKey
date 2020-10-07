@@ -127,7 +127,6 @@ void HttpApiServer::BuildRoutes()
 		nlohmann::json jobj;
 
 		jobj["uptime"] = Globals::FormatString("%ld", Globals::GetUptime());
-		jobj["version"] = VERSION;
 
 		return crow::response(200, jobj.dump());
 	});

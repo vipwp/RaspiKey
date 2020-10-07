@@ -41,7 +41,7 @@ IReportFilter* g_pReportFilters[3] = { nullptr };
 
 int main(int argc, char** argv)
 {	
-	InfoMsg("RaspiKey " VERSION ".");
+	InfoMsg("RaspiKey");
 
 	// Get RaspiKey binary "working" dir
 	readlink("/proc/self/exe", Globals::g_szModuleDir, sizeof(Globals::g_szModuleDir));

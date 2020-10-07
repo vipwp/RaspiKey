@@ -30,7 +30,7 @@
           <span class="md-body-1" v-if="!connected"><md-icon>usb</md-icon> Connecting...</span>
         </div>
 
-        <div class="md-body-2">Version: <span class="md-body-1">{{ version }}</span></div>
+        <!-- <div class="md-body-2">Version: <span class="md-body-1">{{ version }}</span></div> -->
         <div class="md-body-2">Uptime: <span class="md-body-1">{{ uptime }}</span></div>
       </div>
     </md-content>
@@ -54,11 +54,13 @@
 
     </md-content>
 
-    <div class="md-caption">RaspiKey, &copy;2020 George Samartzidis.</div> 
+    <div class="md-caption">RaspiKey &copy;2020 George Samartzidis.</div>       
+    <div class="md-caption">Version {{version}} (sha:{{gitVersion.shortSHA}})</div>   
     <a href="https://github.com/samartzidis/RaspiKey" target="_blank">GitHub</a>
-  </div>
+    
+{{test}}
 
-  
+  </div>
 
 </template>
 
@@ -67,8 +69,10 @@
   import ModalDialog from './components/ModalDialog.vue'
   import ApiService from './api-service'
   import Util from './util'
-  import FileSaver from 'file-saver';
-  
+  import FileSaver from 'file-saver';  
+
+  const gitVersion = require('./.git-version.json');
+  const version = process.env.VUE_APP_VERSION + "." + gitVersion.lastCommitNumber;
 
   export default {
     name: 'app',
@@ -95,8 +99,9 @@
         busy: false,
         discovery: false,
         uptime: null,
-        version: null,
-        intervalid: null        
+        intervalid: null,
+        gitVersion: gitVersion,
+        version: version
       }
     },
     computed: {
@@ -146,7 +151,6 @@
         try {      
           let res = await ApiService.getInfo();
           this.uptime = Util.formatUptime(res.uptime);
-          this.version = res.version;
 
           res = await ApiService.getDiscovery();
           this.discovery = (res.v === "on");

@@ -25,7 +25,6 @@
 #define LOG_FILE_PATH "/tmp/raspikey.log"
 #define DATA_DIR "/data"
 #define DATA_ARCHIVE "/boot/data.tar.bz2"
-#define VERSION "1.2.5"
 //
 //
 
@@ -63,6 +62,7 @@ namespace Globals
 		HidF23 = 0x72,
 		HidF24 = 0x73,
 		HidDel = 0x4c,
+		HidBackspace = 0x2a,
 		HidLeft = 0x50,
 		HidHome = 0x4a,
 		HidRight = 0x4f,

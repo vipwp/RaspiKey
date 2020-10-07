@@ -5,5 +5,6 @@
         "thread": "cpp",
         "algorithm": "cpp"
     },
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "files.eol": "\n"
 }

@@ -96,7 +96,7 @@
         {
             "label": "Pack",
             "type": "shell",
-            "command": "rm -fr ${workspaceRoot}/setup/raspikey/html && cp -R ${workspaceRoot}/ui/dist ${workspaceRoot}/setup/raspikey/html && cp -f ${workspaceRoot}/build/Release/raspikey ${workspaceRoot}/setup/raspikey && rm -f ${workspaceRoot}/build/raspikey.zip && 7z a -mx=9 ${workspaceRoot}/build/raspikey.zip ${workspaceRoot}/setup/*",
+            "command": "rm -fr ${workspaceRoot}/setup/raspikey/html && cp -R ${workspaceRoot}/ui/dist ${workspaceRoot}/setup/raspikey/html && cp -f ${workspaceRoot}/build/Release/raspikey ${workspaceRoot}/setup/raspikey && rm -f ${workspaceRoot}/build/raspikey.zip && 7z a -mx=9 ${workspaceRoot}/build/setup.zip ${workspaceRoot}/setup/*",
             "options": {
                 "cwd": "${workspaceRoot}"
             },

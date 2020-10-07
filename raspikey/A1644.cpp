@@ -37,6 +37,7 @@ size_t A1644::ProcessInputReport(uint8_t* buf, size_t len)
 
 	A1644HidReport& inRpt = *reinterpret_cast<A1644HidReport*>(buf);
 
+	m_FakeFnActive = false;
 	if (m_Settings.SwapFnCtrl)
 	{
 		//Process LCtrl modifier and translate to FakeFn key
@@ -52,11 +53,13 @@ size_t A1644::ProcessInputReport(uint8_t* buf, size_t len)
 	//Process special key input
 	if (inRpt.Special)
 	{
-		if (inRpt.Special & 0x1) //Eject (translate to Del)
-			inRpt.Key1 = Globals::HidDel; //Set Del key
+		if (inRpt.Special & 0x1) // Eject
+			inRpt.Key1 = Globals::HidDel; // Translate to Del
 
-		if (inRpt.Special & 0x2) //Fn (translate to LCtrl)
+		if (inRpt.Special & 0x2) //Fn 
 		{
+			// Translate to LCtrl
+
 			//If we swap Fn and Ctrl
 			if (m_Settings.SwapFnCtrl)
 				inRpt.Modifier |= (uint8_t)Globals::HidLCtrlMask; //Set LCtrl modifier
@@ -107,6 +110,8 @@ size_t A1644::ProcessInputReport(uint8_t* buf, size_t len)
 	{
 		switch (inRpt.Key1)
 		{
+		case Globals::HidBackspace: inRpt.Key1 = Globals::HidDel;
+			break;
 		case Globals::HidLeft: inRpt.Key1 = Globals::HidHome; 
 			break;
 		case Globals::HidRight: inRpt.Key1 = Globals::HidEnd; 
