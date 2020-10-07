@@ -95,14 +95,13 @@ echo "Storage=none" | cat >> /etc/systemd/journald.conf
 # Disable unneeded services
 echo "Disabling unneeded services"
 systemctl disable apt-daily-upgrade.timer apt-daily.timer systemd-tmpfiles-clean.timer systemd-tmpfiles-clean cron dphys-swapfile systemd-timesyncd networking
-systemctl disable systemd-random-seed systemd-hostnamed systemd-timesyncd #keyboard-setup
-systemctl mask systemd-rfkill systemd-rfkill.socket # systemd-update-utmp systemd-update-utmp-runlevel
-systemctl mask rpi-eeprom-update.service hciuart.service systemd-tmpfiles-setup-dev.service systemd-tmpfiles-setup.service systemd-update-utmp.service systemd-journal-flush.service raspi-config.service 
+systemctl disable systemd-random-seed systemd-hostnamed keyboard-setup
+systemctl mask systemd-rfkill systemd-rfkill.socket systemd-update-utmp systemd-update-utmp-runlevel
+systemctl mask rpi-eeprom-update.service systemd-tmpfiles-setup-dev.service systemd-tmpfiles-setup.service systemd-update-utmp.service systemd-journal-flush.service raspi-config.service 
 
 # Remove unneeded packages
 echo "Removing unneeded packages"
-apt-get remove -y triggerhappy dphys-swapfile fake-hwclock cron logrotate rsyslog
-apt-get remove -y rfkill nfs-common man-db avahi-daemon wireless-tools wpasupplicant rng-tools
+apt-get remove -y triggerhappy dphys-swapfile fake-hwclock cron logrotate rsyslog rfkill nfs-common man-db avahi-daemon wireless-tools wpasupplicant rng-tools
 apt-get remove -y openssh-server openssh-sftp-server
 apt-get -y autoremove --purge
 
