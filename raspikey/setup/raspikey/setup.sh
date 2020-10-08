@@ -95,8 +95,8 @@ echo "Storage=none" | cat >> /etc/systemd/journald.conf
 # Disable unneeded services
 echo "Disabling unneeded services"
 systemctl disable apt-daily-upgrade.timer apt-daily.timer systemd-tmpfiles-clean.timer systemd-tmpfiles-clean cron dphys-swapfile systemd-timesyncd networking
-systemctl disable systemd-random-seed systemd-hostnamed keyboard-setup
-systemctl mask systemd-rfkill systemd-rfkill.socket systemd-update-utmp systemd-update-utmp-runlevel
+systemctl disable systemd-random-seed systemd-hostnamed keyboard-setup systemd-fsck-root 
+systemctl mask systemd-rfkill systemd-rfkill.socket systemd-update-utmp systemd-update-utmp-runlevel rng-tools sys-kernel-debug.mount console-setup systemd-logind systemd-user-sessions
 systemctl mask rpi-eeprom-update systemd-tmpfiles-setup-dev systemd-tmpfiles-setup systemd-journal-flush raspi-config 
 
 # Remove unneeded packages
