@@ -100,7 +100,7 @@
             "options": {
                 "cwd": "${workspaceRoot}"
             },
-            //"dependsOn": [ "Build RaspiKey (Release)", "Build UI" ],
+            "dependsOn": [ "Build RaspiKey (Release)", "Build UI" ],
             "problemMatcher": [ ]
         }
     ]
