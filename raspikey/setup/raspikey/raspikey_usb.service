@@ -6,4 +6,4 @@ ExecStart=/boot/raspikey/raspikey_usb
 User=root
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=basic.target
