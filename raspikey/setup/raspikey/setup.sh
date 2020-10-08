@@ -97,7 +97,7 @@ echo "Disabling unneeded services"
 systemctl disable apt-daily-upgrade.timer apt-daily.timer systemd-tmpfiles-clean.timer systemd-tmpfiles-clean cron dphys-swapfile systemd-timesyncd networking
 systemctl disable systemd-random-seed systemd-hostnamed keyboard-setup
 systemctl mask systemd-rfkill systemd-rfkill.socket systemd-update-utmp systemd-update-utmp-runlevel
-systemctl mask rpi-eeprom-update.service systemd-tmpfiles-setup-dev.service systemd-tmpfiles-setup.service systemd-update-utmp.service systemd-journal-flush.service raspi-config.service 
+systemctl mask rpi-eeprom-update systemd-tmpfiles-setup-dev systemd-tmpfiles-setup systemd-journal-flush raspi-config 
 
 # Remove unneeded packages
 echo "Removing unneeded packages"

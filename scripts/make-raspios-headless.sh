@@ -44,7 +44,7 @@ if [ -f "\$zipFile" ] && [ -x "\$(command -v unzip)" ]; then
   rm -f \$zipFile
 fi
 
-echo -"Checking for /boot/start.sh to execute... "
+echo "Checking for /boot/start.sh to execute... "
 if [ -f /boot/start.sh ]; then
   echo "Found /boot/start.sh, executing..."
   chmod +x /boot/start.sh
