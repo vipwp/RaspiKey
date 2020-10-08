@@ -20,6 +20,6 @@ echo "$version"
 rm -fr $workspaceRoot/setup/raspikey/html 
 cp -R $workspaceRoot/ui/dist $workspaceRoot/setup/raspikey/html 
 cp -f $workspaceRoot/build/Release/raspikey $workspaceRoot/setup/raspikey 
-rm -f $workspaceRoot/build/raspikey.zip 
+rm -f $workspaceRoot/build/*.zip 
 7z a -mx=9 $workspaceRoot/build/raspikey-setup.$version+$sha.zip $workspaceRoot/setup/*
 

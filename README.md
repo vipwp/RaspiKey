@@ -28,19 +28,20 @@ Hardware and Software Requirements
 ----------------------------------
 
 1. A plain [Raspberry Pi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) board.
-2. A 2GB (or bigger) micro SD card.
+2. A 2GB (or bigger if not available) micro SD card.
 3. Access to a modern Windows PC with a Web browser. You need this to build your new RaspiKey device and tether a Bluetooth keyboard to it for the first time.
 
 Setting up a new RaspiKey Device
 --------------------------------
 
 1. Download and install [Etcher](https://etcher.io/).
-2. Download the latest RaspiKey release **raspikey.zip** and the latest Raspbian headless release **...-raspbian-stretch-lite-headless.xz** from [here](https://github.com/samartzidis/RaspiKey/releases).
-3. Use Etcher to write the **...-raspbian-stretch-lite-headless.xz** image to the SD card.
-4. Open the **raspikey.zip** file and copy all of its contents (raspikey, start.sh) directly to the the SD card. The SD card should appear on Windows as a drive named **boot**.
-5. Now insert the SD card to the “Raspberry Pi Zero W” device and connect it to the PC using just the middle micro-USB port (labelled “USB” in tiny white letters).
-6. The Pi will boot and continue its setup. This process lasts about 5-6 minutes. You will be able to tell when it's finished when the Raspberry Pi's **green led goes off** (it stays solid green during setup). Once that happens, unplug it from the PC's USB port.
-7. Your new RaspiKey device is now fully configured and ready to use.
+2. Download the latest Raspios headless release ***-raspbian-stretch-lite-headless.xz** from [here](https://github.com/samartzidis/RaspiKey/releases).
+3. Use Etcher to write the ***-raspbian-stretch-lite-headless.xz** image to the SD card.
+4. Download the latest RaspiKey setup release **raspikey-setup.*.zip** from [here](https://github.com/samartzidis/RaspiKey/releases).
+5. Copy the **raspikey-setup.*.zip** (as-is) to the the SD card. The SD card should appear on Windows as a drive named **boot**.
+6. Now insert the SD card to your **Raspberry Pi Zero W** device and connect it to the PC using just the middle micro-USB port (labelled **USB** in tiny white letters).
+7. The Pi will boot and continue its setup. This process lasts about 5-6 minutes. You will be able to tell when it's finished when the Raspberry Pi's **green led goes off** (it stays solid green during setup). Once that happens, unplug it from the PC's USB port.
+8. Your new RaspiKey device is now fully configured and ready to use.
 
 RaspiKey Use
 ------------
@@ -72,7 +73,7 @@ Apple Keyboards Keymap
     </tr>
     <tr>
       <td><kbd>⏏︎ Eject</kbd></td><td><kbd>Del</kbd></td>
-    </tr>
+    </tr>    
     <tr>
       <td><kbd>⌘ Cmd</kbd></td><td><kbd>Alt</kbd></td>
     </tr>    
@@ -90,6 +91,9 @@ Apple Keyboards Keymap
     </tr>
     <tr>
       <td><kbd>Fn</kbd>+<kbd>Return</kbd></td><td><kbd>Insert</kbd></td>
+    </tr>
+    <tr>
+      <td><kbd>Fn</kbd>+<kbd>⌫</kbd></td><td><kbd>Del</kbd></td>
     </tr>
     <tr>
       <td><kbd>Fn</kbd>+<kbd>P</kbd></td><td><kbd>Print Screen</kbd></td>
