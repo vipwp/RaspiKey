@@ -1,5 +1,6 @@
 const chidProcess = require('child_process');
 const { writeFileSync } = require('fs');
+var fs = require('fs');
 
 const longSHA = chidProcess.execSync("git rev-parse HEAD").toString().trim();
 const shortSHA = chidProcess.execSync("git rev-parse --short HEAD").toString().trim();
@@ -8,6 +9,7 @@ const authorName = chidProcess.execSync("git log -1 --pretty=format:'%an'").toSt
 const commitTime = chidProcess.execSync("git log -1 --pretty=format:'%cd'").toString().trim();
 const commitMsg = chidProcess.execSync("git log -1 --pretty=%B").toString().trim();
 const totalCommitCount = chidProcess.execSync("git rev-list --count HEAD").toString().trim();
+const majorMinor = fs.readFileSync('../version.txt','utf8');
 
 const versionInfo = {
     shortSHA: shortSHA,
@@ -16,7 +18,8 @@ const versionInfo = {
     lastCommitAuthor: authorName,
     lastCommitTime: commitTime,
     lastCommitMessage: commitMsg,
-    lastCommitNumber: totalCommitCount
+    lastCommitNumber: totalCommitCount,
+    majorMinor: majorMinor
 }
 
 const versionInfoJson = JSON.stringify(versionInfo, null, 2);

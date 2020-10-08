@@ -14,23 +14,25 @@
 
     <md-content class="md-elevation-1">
       <div class="main-control">
-        <div class="md-headline"><md-icon>settings</md-icon> RaspiKey Control</div>
-
+        <div class="md-headline"><md-icon>settings</md-icon> Settings</div>
+     
+        <div class="md-title"> Bluetooth Radio</div>
         <md-switch v-model="discovery" :disabled="busy" @change="changeDiscovery()"><md-icon>bluetooth_searching</md-icon> Bluetooth Discovery Mode</md-switch>
 
-        <div class="md-title"> State</div>     
+        <div class="md-title"> Device State</div>     
         <div class="md-caption">Save or factory reset the current RaspiKey system state. <br/>You will need to save state when you pair a new keyboard and you'd want to keep it paired them after RaspiKey restarts.</div>         
         <md-button class="md-raised md-primary" v-on:click="saveState()" :disabled="!connected"><md-icon>save</md-icon> Save</md-button>
         <md-button class="md-raised md-accent" v-on:click="resetState()" :disabled="!connected"><md-icon>delete</md-icon> Reset</md-button>
 
-        <div class="md-title">RaspiKey Status</div>
+        <br/><br/>
+
+        <div class="md-headline"><md-icon>assessment</md-icon> Status</div>
 
         <div class="md-body-2">Connection:
           <span class="md-body-1" v-if="connected"><md-icon style="color: #14d100">usb</md-icon> Connected.</span>
           <span class="md-body-1" v-if="!connected"><md-icon>usb</md-icon> Connecting...</span>
         </div>
 
-        <!-- <div class="md-body-2">Version: <span class="md-body-1">{{ version }}</span></div> -->
         <div class="md-body-2">Uptime: <span class="md-body-1">{{ uptime }}</span></div>
       </div>
     </md-content>
@@ -54,9 +56,13 @@
 
     </md-content>
 
-    <div class="md-caption">RaspiKey &copy;2020 George Samartzidis.</div>       
-    <div class="md-caption">Version {{version}} (sha:{{gitVersion.shortSHA}})</div>   
-    <a href="https://github.com/samartzidis/RaspiKey" target="_blank">GitHub</a>
+    <div class="md-caption">RaspiKey {{gitVersion.majorMinor}}.{{gitVersion.lastCommitNumber}}+{{gitVersion.shortSHA}}</div>       
+    <div class="md-caption">&copy;2020 George Samartzidis</div>   
+    <div class="md-caption">
+      <a href="https://github.com/samartzidis/RaspiKey" target="_blank">About</a> |
+      <a href="https://github.com/samartzidis/RaspiKey/releases" target="_blank">Releases</a>
+    </div>   
+    
     
 {{test}}
 
@@ -72,7 +78,6 @@
   import FileSaver from 'file-saver';  
 
   const gitVersion = require('./.git-version.json');
-  const version = process.env.VUE_APP_VERSION + "." + gitVersion.lastCommitNumber;
 
   export default {
     name: 'app',
@@ -100,8 +105,7 @@
         discovery: false,
         uptime: null,
         intervalid: null,
-        gitVersion: gitVersion,
-        version: version
+        gitVersion: gitVersion
       }
     },
     computed: {
