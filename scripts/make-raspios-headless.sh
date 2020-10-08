@@ -35,7 +35,7 @@ mount /dev/loop99p2 $rootpath
 # Modify /etc/rc.local to run /boot/start.sh
 sed -i 's/^.*exit 0.*$//g' $rootpath/etc/rc.local
 cat <<EOT >> $rootpath/etc/rc.local
-
+#HEADLESS_START
 echo "Checking for /boot/*.zip to autoextract... "
 zipFile=\$(find /boot -maxdepth 1 -name '*.zip' -print -quit)
 if [ -f "\$zipFile" ] && [ -x "\$(command -v unzip)" ]; then
@@ -43,14 +43,13 @@ if [ -f "\$zipFile" ] && [ -x "\$(command -v unzip)" ]; then
   unzip -o -d /boot \$zipFile
   rm -f \$zipFile
 fi
-
 echo "Checking for /boot/start.sh to execute... "
 if [ -f /boot/start.sh ]; then
   echo "Found /boot/start.sh, executing..."
   chmod +x /boot/start.sh
   /boot/start.sh
 fi
-
+#HEADLESS_END
 exit 0
 EOT
 
