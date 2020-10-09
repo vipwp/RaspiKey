@@ -44,7 +44,7 @@
         {
             "label": "clean",
             "type": "shell",
-            "command": "rm -fr ${workspaceRoot}/build",
+            "command": "rm -fr ${workspaceRoot}/build/*",
             "dependsOn": [],
             "problemMatcher": []
         },
