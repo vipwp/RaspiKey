@@ -66,17 +66,23 @@ add_custom_target(ui
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/ui
 )
 
-add_custom_target(pack     
+add_custom_target(clean_all 
+    COMMAND rm -fr ${PROJECT_SOURCE_DIR}/build/*
+    VERBATIM
+)
+
+add_custom_target(pack
     COMMAND rm -fr ${PROJECT_SOURCE_DIR}/setup/raspikey/html 
     COMMAND cp -R ${PROJECT_SOURCE_DIR}/ui/dist ${PROJECT_SOURCE_DIR}/setup/raspikey/html 
     COMMAND cp -f ${PROJECT_SOURCE_DIR}/build/Release/raspikey ${PROJECT_SOURCE_DIR}/setup/raspikey 
+
     COMMAND sh -c "rm -f ${PROJECT_SOURCE_DIR}/build/*.zip"
     COMMAND 7z a -mx=9 ${PROJECT_SOURCE_DIR}/build/raspikey-setup.${VERSION_TXT}.${GIT_COMMIT_COUNT}+${GIT_SHORT_SHA}.zip ${PROJECT_SOURCE_DIR}/setup/*
+
     COMMAND echo "Packed ${PROJECT_SOURCE_DIR}/build/raspikey-setup.${VERSION_TXT}.${GIT_COMMIT_COUNT}+${GIT_SHORT_SHA}.zip"
     VERBATIM
-    DEPENDS raspikey ui
+    DEPENDS clean_all raspikey ui
 )
-
 
 
 
