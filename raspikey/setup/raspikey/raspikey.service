@@ -16,4 +16,4 @@ CPUSchedulingPolicy=fifo
 CPUSchedulingPriority=1
 
 [Install]
-WantedBy=basic.target
+WantedBy=multi-user.target
