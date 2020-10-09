@@ -50,6 +50,8 @@ execute_process(
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} OUTPUT_VARIABLE GIT_SHORT_SHA ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
+string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE_TOLOWER)
+set(SEMVER_STRING ${VERSION_TXT}.${GIT_COMMIT_COUNT}-${CMAKE_BUILD_TYPE_TOLOWER}+${GIT_SHORT_SHA})
 
 # Copy executable to the Pi reference device for testing
 add_custom_target(deploy 
@@ -74,9 +76,9 @@ add_custom_target(pack
     COMMAND rm -fr ${PROJECT_SOURCE_DIR}/setup/raspikey/html 
     COMMAND cp -R ${PROJECT_SOURCE_DIR}/ui/dist ${PROJECT_SOURCE_DIR}/setup/raspikey/html 
     COMMAND cp -f ${PROJECT_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE}/raspikey ${PROJECT_SOURCE_DIR}/setup/raspikey 
-    COMMAND 7z a -mx=9 ${PROJECT_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE}/raspikey-setup.${VERSION_TXT}.${GIT_COMMIT_COUNT}-${CMAKE_BUILD_TYPE}+${GIT_SHORT_SHA}.zip ${PROJECT_SOURCE_DIR}/setup/*
+    COMMAND 7z a -mx=9 ${PROJECT_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE}/raspikey-setup.${SEMVER_STRING}.zip ${PROJECT_SOURCE_DIR}/setup/*
 
-    COMMAND echo "Packed ${PROJECT_SOURCE_DIR}/build/raspikey-setup.${VERSION_TXT}.${GIT_COMMIT_COUNT}-${CMAKE_BUILD_TYPE}+${GIT_SHORT_SHA}.zip"
+    COMMAND echo "Packed raspikey-setup.${SEMVER_STRING}.zip"
     VERBATIM
     DEPENDS raspikey ui
 )
