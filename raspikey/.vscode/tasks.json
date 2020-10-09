@@ -69,6 +69,16 @@
             "problemMatcher": []
         },
         {
+            "label": "deploy",
+            "type": "shell",
+            "command": "cmake --build ${workspaceRoot}/build/Debug --config Debug --target deploy -- -j 10",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "dependsOn": [ "configure" ],
+            "problemMatcher": []
+        },
+        {
             "label": "pack",
             "type": "shell",
             "command": "cmake --build ${workspaceRoot}/build/Release --config MinSizeRel --target pack -- -j 10",

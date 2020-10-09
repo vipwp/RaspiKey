@@ -1,7 +1,11 @@
-﻿
-cmake_minimum_required (VERSION 3.8)
+﻿# cmake build script.
+#
+# Notes:
+# To use the "deploy" target you nee to set the REFERENCE_PI_DEVICE_ADDRESS variable to the IP address of the PI device.
+#
 
-set(REFERENCE_PI_DEVICE_ADDRESS "192.168.0.53") # Replace with IP address of reference PI device
+
+cmake_minimum_required (VERSION 3.8)
 
 project ("raspikey")
 
@@ -55,9 +59,11 @@ set(SEMVER_STRING ${VERSION_TXT}.${GIT_COMMIT_COUNT}-${CMAKE_BUILD_TYPE_TOLOWER}
 
 # Copy executable to the Pi reference device for testing
 add_custom_target(deploy 
-    COMMAND sshpass -p raspberry scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $<TARGET_FILE:raspikey> pi@${REFERENCE_PI_DEVICE_ADDRESS}:/tmp 
+    COMMAND sshpass -p raspberry scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${PROJECT_SOURCE_DIR}/setup/raspikey/raspikey_usb pi@$ENV{REFERENCE_PI_DEVICE_ADDRESS}:/home/pi/ 
+    COMMAND sshpass -p raspberry scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $<TARGET_FILE:raspikey> pi@$ENV{REFERENCE_PI_DEVICE_ADDRESS}:/home/pi/ 
+    COMMAND sshpass -p raspberry scp -ro StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${PROJECT_SOURCE_DIR}/ui/dist pi@$ENV{REFERENCE_PI_DEVICE_ADDRESS}:/home/pi/html
     VERBATIM
-    DEPENDS raspikey
+    #DEPENDS raspikey ui
 )
 
 add_custom_target(ui 
