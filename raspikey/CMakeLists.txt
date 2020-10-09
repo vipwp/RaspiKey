@@ -32,12 +32,51 @@ target_link_libraries(raspikey
 
 #target_link_libraries(raspikey -static) # Static linking (causes some libc linking warnings)
 
-#set_target_properties(raspikey PROPERTIES LINK_FLAGS_RELEASE -s) # Strip
-set_target_properties(raspikey PROPERTIES LINK_FLAGS -s) # Strip
+set_target_properties(raspikey PROPERTIES LINK_FLAGS_RELEASE -s) # Strip
+#set_target_properties(raspikey PROPERTIES LINK_FLAGS -s) # Strip
+
+
+execute_process(
+    COMMAND cat version.txt
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} OUTPUT_VARIABLE VERSION_TXT ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+execute_process(
+    COMMAND git rev-list --all --count
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} OUTPUT_VARIABLE GIT_COMMIT_COUNT ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+execute_process(
+    COMMAND git rev-parse --short HEAD 
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} OUTPUT_VARIABLE GIT_SHORT_SHA ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
 
 # Copy executable to the Pi reference device for testing
-# add_custom_command(TARGET raspikey POST_BUILD
-#     COMMAND sshpass -p raspberry scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $<TARGET_FILE:raspikey> pi@${REFERENCE_PI_DEVICE_ADDRESS}:/tmp 
-# )
+add_custom_target(deploy 
+    COMMAND sshpass -p raspberry scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $<TARGET_FILE:raspikey> pi@${REFERENCE_PI_DEVICE_ADDRESS}:/tmp 
+    VERBATIM
+    DEPENDS raspikey
+)
+
+add_custom_target(ui 
+    COMMAND npm install && npm run build
+    VERBATIM
+    DEPENDS raspikey
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/ui
+)
+
+add_custom_target(pack 
+    COMMAND echo "Packing raspikey-setup.${VERSION_TXT}.${GIT_COMMIT_COUNT}+${GIT_SHORT_SHA}.zip ..."
+    COMMAND rm -fr ${PROJECT_SOURCE_DIR}/setup/raspikey/html 
+    COMMAND cp -R ${PROJECT_SOURCE_DIR}/ui/dist ${PROJECT_SOURCE_DIR}/setup/raspikey/html 
+    COMMAND cp -f ${PROJECT_SOURCE_DIR}/build/Release/raspikey ${PROJECT_SOURCE_DIR}/setup/raspikey 
+    COMMAND rm -f ${PROJECT_SOURCE_DIR}/build/*.zip 
+    COMMAND 7z a -mx=9 ${PROJECT_SOURCE_DIR}/build/raspikey-setup.$version+$sha.zip ${PROJECT_SOURCE_DIR}/setup/*
+    VERBATIM
+    DEPENDS raspikey ui
+)
+
+
 
 

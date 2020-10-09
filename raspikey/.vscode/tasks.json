@@ -4,45 +4,17 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Configure RaspiKey (Debug)",
+            "label": "configure",
             "type": "shell",            
-            "command": "cmake",
-            "args": [
-                "-G'Unix Makefiles'",
-                "-Bbuild/Debug",
-                "--no-warn-unused-cli",
-                "-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE",
-                "-DCMAKE_BUILD_TYPE:STRING=Debug",
-                "-DCMAKE_TOOLCHAIN_FILE:FILEPATH=${workspaceRoot}/toolchain-rpi0.cmake",
-                "-H${workspaceRoot}"     
-            ],
+            "command": "sh ./configure.sh",
             "options": {
                 "cwd": "${workspaceRoot}"
             },
-            "dependsOn": [ ],
+            "dependsOn": [],
             "problemMatcher": []
-        },
+        },    
         {
-            "label": "Configure RaspiKey (Release)",
-            "type": "shell",            
-            "command": "cmake",
-            "args": [
-                "-G'Unix Makefiles'",
-                "-Bbuild/Release",
-                "--no-warn-unused-cli",
-                "-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE",
-                "-DCMAKE_BUILD_TYPE:STRING=MinSizeRel",
-                "-DCMAKE_TOOLCHAIN_FILE:FILEPATH=${workspaceRoot}/toolchain-rpi0.cmake",
-                "-H${workspaceRoot}"     
-            ],
-            "options": {
-                "cwd": "${workspaceRoot}"
-            },
-            "dependsOn": [ ],
-            "problemMatcher": []
-        },        
-        {
-            "label": "Build RaspiKey (Debug)",
+            "label": "raspikey-debug",
             "type": "shell",
             "options": {
                 "cwd": "${workspaceRoot}"
@@ -52,11 +24,11 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "dependsOn": [ "Configure RaspiKey (Debug)" ],
+            "dependsOn": [ "configure" ],
             "problemMatcher": []
         },
         {
-            "label": "Build RaspiKey (Release)",
+            "label": "raspikey-release",
             "type": "shell",
             "options": {
                 "cwd": "${workspaceRoot}"
@@ -66,42 +38,45 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "dependsOn": [ "Configure RaspiKey (Release)" ],
+            "dependsOn": [ "configure" ],
             "problemMatcher": []
         },
         {
-            "label": "Clean",
+            "label": "clean",
             "type": "shell",
             "command": "rm -fr ${workspaceRoot}/build",
-            "problemMatcher": [ ]
+            "dependsOn": [],
+            "problemMatcher": []
         },
         {
-            "label": "Build UI",
+            "label": "ui",
             "type": "shell",
-            "command": "npm install && npm run build",
+            "command": "cmake --build ${workspaceRoot}/build/Release --config MinSizeRel --target ui -- -j 10",
             "options": {
-                "cwd": "${workspaceRoot}/ui"
+                "cwd": "${workspaceRoot}"
             },
-            "problemMatcher": [ ]
+            "dependsOn": [ "configure" ],
+            "problemMatcher": []
         },
         {
-            "label": "Start UI",
+            "label": "start-ui",
             "type": "shell",
             "command": "npm install && npm run serve",
             "options": {
                 "cwd": "${workspaceRoot}/ui"
             },
-            "problemMatcher": [ ]
+            "dependsOn": [],
+            "problemMatcher": []
         },
         {
-            "label": "Pack",
+            "label": "pack",
             "type": "shell",
-            "command": "bash ${workspaceRoot}/.tasks/pack.sh ${workspaceRoot}",
+            "command": "cmake --build ${workspaceRoot}/build/Release --config MinSizeRel --target pack -- -j 10",
             "options": {
                 "cwd": "${workspaceRoot}"
             },
-            "dependsOn": [ "Build RaspiKey (Release)", "Build UI" ],
-            "problemMatcher": [ ]
+            "dependsOn": [ "configure" ],
+            "problemMatcher": []
         }
     ]
 }
