@@ -1,7 +1,7 @@
 ﻿
 cmake_minimum_required (VERSION 3.8)
 
-set(REFERENCE_PI_DEVICE_ADDRESS "192.168.0.62") # Replace with IP address of reference PI device
+set(REFERENCE_PI_DEVICE_ADDRESS "192.168.0.53") # Replace with IP address of reference PI device
 
 project ("raspikey")
 

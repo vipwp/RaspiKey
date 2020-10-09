@@ -55,7 +55,7 @@ Known Issues
 ------------
 
 *   The battery level indicator does not work on the Apple Magic (A1644) keyboard.
-*   The Ctrl-LShift-T combination does not work on Apple keyboards, use the Ctrl-RShift-T instead where applicable.
+*   The Ctrl-LShift-T combination does not work on Apple keyboards, use the Ctrl-RShift-T instead where applicable. This is due to a confirmed hardware issue with the keyboard itself as [also mentioned here](https://github.com/free5lot/hid-apple-patched/issues/6), which is a similar project.
 
 Apple Keyboards Keymap
 ----------------------
