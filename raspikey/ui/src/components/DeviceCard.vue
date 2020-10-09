@@ -126,7 +126,7 @@ export default {
       if(modalias.indexOf("v004cp0267") !== -1 || modalias.indexOf("v05acp0267") !== -1)
         return "A1644";
       else if(modalias.indexOf("v05ac") !== -1)
-        return "A1644";
+        return "A1314";
       else
         return null;
     }
