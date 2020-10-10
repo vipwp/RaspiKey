@@ -9,18 +9,20 @@ You will need a Raspberry Pi Zero "reference" device and a Linux (x86) developme
 
 ### Required on the Linux development PC
 
-* VSCode with extensions: Task Explorer, CMake Tools, CMake, C/C++.
 * cmake 3.16.3+, nodejs v10.19.0+, npm 6.14.4+, 7z, sshpass.
 * GCC 8.3 arm-linux-gnueabihf cross compiler [toolchain](https://github.com/Pro/raspi-toolchain/releases/download/v1.0.1/raspi-toolchain.tar.gz).
+* *Optionally:* VSCode with extensions: Task Explorer, CMake Tools, CMake, C/C++.
 
-Development PC setup instructions (Ubuntu 20.04):
 
-Install package dependencies:
+## Development PC setup and build instructions (Ubuntu 20.04):
+
+### 1. Install package dependencies
+
 ```sh
 sudo apt-get install -y cmake nodejs npm p7zip-full sshpass
 ```
 
-Install code dependencies:
+### 2. Install code dependencies
 
 ```sh
 sudo -s
@@ -32,7 +34,6 @@ wget https://github.com/Pro/raspi-toolchain/releases/download/v1.0.1/raspi-toolc
 tar xvf raspi-toolchain.tar.gz -C /opt
 ```
 > ATTENTION: Replace *[Pi IP address]* with your reference Pi device's IP address.
-
 
 To optionally export/mount the reference Pi device's root FS via NFS:
 ```sh
@@ -53,4 +54,15 @@ sudo -s
 mkdir /mnt/raspikey-dev
 sudo mount -t nfs [Pi IP address]:/ /mnt/raspikey-dev
 ```
+
+### 3. Build
+
+```sh
+git clone https://github.com/samartzidis/RaspiKey.git
+cd ./RaspiKey/raspikey
+sh ./configure.sh
+cmake --build ./build/Release --config MinSizeRel --target pack -- -j 10
+```
+
+
 
