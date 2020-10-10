@@ -38,7 +38,7 @@ size_t A1644::ProcessInputReport(uint8_t* buf, size_t len)
 	A1644HidReport& inRpt = *reinterpret_cast<A1644HidReport*>(buf);
 	
 	// Workaround for the Fn-LShift-T keyboard hardware fault
-	if(inRpt.Modifier == 0 && inRpt.Key1 == 1 && inRpt.Key2 == 1 && inRpt.Key3 == 1 && inRpt.Key4 == 1 && inRpt.Key5 == 1 && inRpt.Key6 == 1)
+	if(m_Settings.SwapFnCtrl && inRpt.Modifier == 0 && inRpt.Key1 == 1 && inRpt.Key2 == 1 && inRpt.Key3 == 1 && inRpt.Key4 == 1 && inRpt.Key5 == 1 && inRpt.Key6 == 1)
 	{
 		inRpt.Modifier = Globals::HidLCtrlMask | Globals::HidLShiftMask;
 		inRpt.Key1 = 0x17; //'t' scancode
