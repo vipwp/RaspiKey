@@ -36,9 +36,9 @@ ENDFOREACH()
 
 set(CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH};${SYSROOT_PATH}/usr/lib/${TOOLCHAIN_HOST}")
 
-set(CMAKE_C_FLAGS "-mcpu=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard -pthread ${COMMON_FLAGS}" CACHE STRING "Flags for Raspberry PI 1 B+ Zero")
-
+set(CMAKE_C_FLAGS "-mcpu=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard -pthread -Wno-psabi ${COMMON_FLAGS}" CACHE STRING "Flags for Raspberry PI 1 B+ Zero")
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++14" CACHE STRING "Flags for Raspberry PI 1 B+ Zero")
+
 set(CMAKE_FIND_ROOT_PATH "${CMAKE_INSTALL_PREFIX};${CMAKE_PREFIX_PATH};${CMAKE_SYSROOT}")
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)

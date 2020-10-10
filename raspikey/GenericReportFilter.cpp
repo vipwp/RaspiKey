@@ -10,7 +10,6 @@ using namespace std;
 
 GenericReportFilter::GenericReportFilter()
 {
-	
 }
 
 

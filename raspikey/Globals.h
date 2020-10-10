@@ -37,6 +37,7 @@ namespace Globals
 		HidKeyB = 0x5,
 		HidKeyP = 0x13,
 		HidKeyS = 0x16,
+		HidKeyT = 0x17,
 		HidF1 = 0x3a,
 		HidF2 = 0x3b,
 		HidF3 = 0x3c,

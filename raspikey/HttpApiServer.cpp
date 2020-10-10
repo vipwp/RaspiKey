@@ -12,6 +12,7 @@
 #include "Logger.h"
 #include "Main.h"
 
+
 using namespace std;
 
 HttpApiServer::HttpApiServer()
@@ -95,7 +96,7 @@ void HttpApiServer::BuildRoutes()
 	CROW_ROUTE(m_crowApp, "/save-data") ([]()
 	{
 		int retval = system(
-			"/bin/mount -o remount,rw /boot &&"\ 
+			"/bin/mount -o remount,rw /boot &&"\
 			"/bin/tar cpjf " DATA_ARCHIVE " -C /data . &&"\
 			"/bin/mount -o remount,ro /boot");
 			

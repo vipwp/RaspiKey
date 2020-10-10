@@ -21,6 +21,7 @@ include_directories(
     ${SYSROOT_PATH}/usr/include/dbus-1.0;
     ${SYSROOT_PATH}/usr/lib/arm-linux-gnueabihf/dbus-1.0/include;
     ${SYSROOT_PATH}/usr/include;
+    ${SYSROOT_PATH}/beast_http_server;
 )
 
 add_executable (raspikey ${SOURCE_LIST})
