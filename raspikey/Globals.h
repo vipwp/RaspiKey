@@ -81,7 +81,9 @@ namespace Globals
 		HidLAltMask = 0x4,
 		HidRAltMask = 0x40,
 		HidLCmdMask = 0x8,
-		HidRCmdMask = 0x80
+		HidRCmdMask = 0x80,
+		HidLShiftMask = 0x2,
+		HidRShiftMask = 0x20
 	};
 
 	typedef struct HidgOutputReport

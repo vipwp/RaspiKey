@@ -61,9 +61,10 @@ set(SEMVER_STRING ${VERSION_TXT}.${GIT_COMMIT_COUNT}-${CMAKE_BUILD_TYPE_TOLOWER}
 add_custom_target(deploy 
     COMMAND sshpass -p raspberry scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${PROJECT_SOURCE_DIR}/setup/raspikey/raspikey_usb pi@$ENV{REFERENCE_PI_DEVICE_ADDRESS}:/home/pi/ 
     COMMAND sshpass -p raspberry scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $<TARGET_FILE:raspikey> pi@$ENV{REFERENCE_PI_DEVICE_ADDRESS}:/home/pi/ 
-    COMMAND sshpass -p raspberry scp -ro StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${PROJECT_SOURCE_DIR}/ui/dist pi@$ENV{REFERENCE_PI_DEVICE_ADDRESS}:/home/pi/html
+    #COMMAND sshpass -p raspberry scp -ro StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${PROJECT_SOURCE_DIR}/ui/dist pi@$ENV{REFERENCE_PI_DEVICE_ADDRESS}:/home/pi/html
     VERBATIM
     #DEPENDS raspikey ui
+    DEPENDS raspikey
 )
 
 add_custom_target(ui 
