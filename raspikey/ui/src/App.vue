@@ -63,9 +63,6 @@
       <a href="https://github.com/samartzidis/RaspiKey/releases" target="_blank">Releases</a>
     </div>   
     
-    
-{{test}}
-
   </div>
 
 </template>
