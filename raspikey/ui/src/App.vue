@@ -62,7 +62,7 @@
       <a href="https://github.com/samartzidis/RaspiKey" target="_blank">About</a> |
       <a href="https://github.com/samartzidis/RaspiKey/releases" target="_blank">Releases</a>
     </div>   
-    
+
   </div>
 
 </template>
@@ -82,10 +82,10 @@
       DeviceCard, ModalDialog
     },
     mounted: function () {
-
       console.log("mounted()");
 
       this.intervalid = setInterval(() => this.updateUi(this), 5000);
+      window.addEventListener('beforeunload', this.beforeWindowUnload);
 
       this.updateUi();
     },
@@ -93,6 +93,7 @@
       console.log("beforeDestroy()");
 
       clearInterval(this.intervalid);
+      window.removeEventListener('beforeunload', this.beforeWindowUnload);
     },
     data: function () {
       return {
@@ -116,6 +117,11 @@
           console.error(e);
           await this.$refs.modalDialog1.showModal(e.message, "Error");
         }
+      },
+      beforeWindowUnload: async function(e) {
+
+        await ApiService.setDiscovery(false);
+
       },
       resetState: async function() {
         let dialogResult = await this.$refs.modalDialog1.showModal("This will reset RaspiKey to the factory default settings. Are you sure?", "Warning", ModalDialog.ButtonStyleEnum.Ok | ModalDialog.ButtonStyleEnum.Cancel);
@@ -144,7 +150,7 @@
         }
 
       },
-      updateUi: async function(src) {
+      updateUi: async function() {
         
         if(this.busy)
           return;
@@ -166,8 +172,6 @@
 
           this.connected = false;
         }
-        finally {          
-        }
       },
       pairDevice: async function(deviceData) {
         
@@ -179,8 +183,8 @@
           let result = await ApiService.beginPairDevice(deviceData.address); 
           
           if (result.hasOwnProperty("pinCode")) {
-                let msg = `Type the following pin code on your keyboard ${result.pinCode} then press ENTER on the keyboard and finally click OK here.`;
-                let dialogResult = await this.$refs.modalDialog1.showModal(msg, "Pairing...");                                                 
+            let msg = `Type the following pin code on your keyboard ${result.pinCode} then press ENTER on the keyboard and finally click OK here.`;
+            await this.$refs.modalDialog1.showModal(msg, "Pairing...");                                                 
           }
 
           await ApiService.endPairDevice(deviceData.address); 
