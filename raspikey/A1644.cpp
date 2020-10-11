@@ -51,21 +51,27 @@ size_t A1644::ProcessInputReport(uint8_t* buf, size_t len)
 	// SwapFnCtrl mode
 	if (m_Settings.SwapFnCtrl)
 	{
-		bool fakeFnActiveBefore = m_FakeFnActive;
-		m_FakeFnActive = inRpt.Modifier & Globals::HidLCtrlMask;
-		if (fakeFnActiveBefore != m_FakeFnActive) //FakeFn state changed?
-			return 0; //Do not send scancode if state unchanged
+		// Physical LCtrl pressed
+		if (inRpt.Modifier & Globals::HidLCtrlMask)
+		{
+			if(!inRpt.Key1) // And is it pressed alone?
+				m_FakeFnActive = true;
+			inRpt.Modifier &= ~Globals::HidLCtrlMask; //Clear LCtrl modifier
+		}
+		else // Physical LCtrl not pressed
+		{
+			if (!inRpt.Key1) // Only unset m_FakeFnActive when there is no other key still being pressed
+				m_FakeFnActive = false;
+		}
 
-		// Fn pressed?
-		if (inRpt.Special & 0x2) 
-			inRpt.Modifier |= (uint8_t)Globals::HidLCtrlMask; //Set LCtrl modifier
+		// Physical Fn pressed?
+		if (inRpt.Special & 0x2)
+			inRpt.Modifier |= Globals::HidLCtrlMask; // Set LCtrl modifier
 		else
-			inRpt.Modifier &= (uint8_t)~Globals::HidLCtrlMask; //Clear LCtrl modifier
+			inRpt.Modifier &= ~Globals::HidLCtrlMask; // Clear LCtrl modifier
 	}
 	else // Not SwapFnCtrl mode
-	{
 		m_FakeFnActive = inRpt.Special & 0x2;
-	}
 		
 	// Eject Pressed?
 	if (inRpt.Special & 0x1)
