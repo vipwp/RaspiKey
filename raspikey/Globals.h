@@ -34,6 +34,8 @@ namespace Globals
 	//
 	enum HidCodes : uint8_t
 	{
+		HidKeyNone = 0x0, // No key pressed
+		HidKeyErrOvf = 0x1, //  Keyboard Error Roll Over - used for all slots if too many keys are pressed
 		HidKeyB = 0x5,
 		HidKeyP = 0x13,
 		HidKeyS = 0x16,
