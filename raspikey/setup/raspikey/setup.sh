@@ -99,6 +99,8 @@ systemctl disable systemd-random-seed systemd-hostnamed keyboard-setup systemd-f
 systemctl mask systemd-rfkill systemd-rfkill.socket systemd-update-utmp systemd-update-utmp-runlevel rng-tools sys-kernel-debug.mount console-setup systemd-logind systemd-user-sessions
 systemctl mask rpi-eeprom-update systemd-tmpfiles-setup-dev systemd-tmpfiles-setup systemd-journal-flush raspi-config 
 
+# TODO: Error with "systemd-update-utmp-runlevel" -> Failed to start error (happens before the "Removing unneeded packages" starts)
+
 # Remove unneeded packages
 echo "Removing unneeded packages"
 apt-get remove -y triggerhappy dphys-swapfile fake-hwclock cron logrotate rsyslog rfkill nfs-common man-db avahi-daemon wireless-tools wpasupplicant rng-tools
