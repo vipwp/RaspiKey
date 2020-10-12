@@ -36,19 +36,19 @@ Setting up a new RaspiKey Device
 
 1. Download and install [Etcher](https://etcher.io/).
 2. Download the latest Raspios headless release **2020-08-20-raspios-buster-armhf-lite-headless.xz** from [here](https://github.com/samartzidis/RaspiKey/releases/tag/2020-08-20-raspios-buster-armhf-lite-headless).
-3. Use Etcher to write the **2020-08-20-raspios-buster-armhf-lite-headless.xz** image to the SD card.
-4. Download the latest RaspiKey setup release **raspikey-setup.*.zip** from [here](https://github.com/samartzidis/RaspiKey/releases).
+3. Use **Etcher** to write the **2020-08-20-raspios-buster-armhf-lite-headless.xz** image to the SD card.
+4. Download the latest RaspiKey release **raspikey-setup.*.zip** from [here](https://github.com/samartzidis/RaspiKey/releases).
 5. Copy the **raspikey-setup.*.zip** (as-is) to the the SD card. The SD card should appear on Windows as a drive named **boot**.
-6. Now insert the SD card to your **Raspberry Pi Zero W** device and connect it to the PC using just the middle micro-USB port (labelled **USB** in tiny white letters).
+6. Now insert the SD card to your **Raspberry Pi Zero W** device and connect it to the PC **using the middle micro-USB port** (labelled **USB** in tiny white letters).
 7. The Pi will boot and continue its setup. This process lasts about 5-6 minutes. You will be able to tell when it's finished when the Raspberry Pi's **green led goes off** (it stays solid green during setup). Once that happens, unplug it from the PC's USB port.
 8. Your new RaspiKey device is now fully configured and ready to use.
 
 RaspiKey Use
 ------------
 
-1. Plug RaspiKey to a PC.
-2. Wait for about 10 seconds for it to start and open your Web browser at **[http://169.254.1.1](http://169.254.1.1)**
-3. Use the displayed configuration page to discover and connect a Bluetooth keyboard to it. Once the keyboard is connected, it will be usable on this PC directly or on anywhere else you plug RaspiKey to. You do not need to reconfigure RaspiKey to plug it in and use it elsewhere.
+1. Connect (re-connect) your **Raspberry Pi Zero W** device to the PC **using the middle micro-USB port**.
+2. Wait for about 10 seconds for it to start and open your PC Web browser at **[http://169.254.1.1](http://169.254.1.1)**
+3. Use the displayed configuration page to discover and connect a Bluetooth keyboard to it. Once the keyboard is connected, it will be usable on this PC directly or on anywhere else that you plug RaspiKey to. That is, you do not need to reconfigure RaspiKey to plug it in and use it elsewhere.
 
 
 Known Issues
