@@ -35,7 +35,7 @@ Setting up a new RaspiKey Device
 --------------------------------
 
 1. Download and install [Etcher](https://etcher.io/).
-2. Download the latest Raspios headless release ***2020-08-20-raspios-buster-armhf-lite-headless.xz** from [here](https://github.com/samartzidis/RaspiKey/releases/tag/2020-08-20-raspios-buster-armhf-lite-headless).
+2. Download the latest Raspios headless release **2020-08-20-raspios-buster-armhf-lite-headless.xz** from [here](https://github.com/samartzidis/RaspiKey/releases/tag/2020-08-20-raspios-buster-armhf-lite-headless).
 3. Use Etcher to write the ***2020-08-20-raspios-buster-armhf-lite-headless.xz** image to the SD card.
 4. Download the latest RaspiKey setup release **raspikey-setup.*.zip** from [here](https://github.com/samartzidis/RaspiKey/releases).
 5. Copy the **raspikey-setup.*.zip** (as-is) to the the SD card. The SD card should appear on Windows as a drive named **boot**.
