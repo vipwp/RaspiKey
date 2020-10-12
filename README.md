@@ -41,13 +41,13 @@ Setting up a new RaspiKey Device
 5. Copy the **raspikey-setup.*.zip** (as-is) to the the SD card. The SD card should appear on Windows as a drive named **boot**.
 6. Now insert the SD card to your **Raspberry Pi Zero W** device and connect it to the PC **using the middle micro-USB port** (labelled **USB** in tiny white letters).
 7. The Pi will boot and continue its setup. This process lasts about 5-6 minutes. You will be able to tell when it's finished when the Raspberry Pi's **green led goes off** (it stays solid green during setup). Once that happens, unplug it from the PC's USB port.
-8. Your new RaspiKey device is now fully configured and ready to use.
+8. Your new **RaspiKey** device is now fully configured and ready to use.
 
 RaspiKey Use
 ------------
 
-1. Connect (re-connect) your **Raspberry Pi Zero W** device to the PC **using the middle micro-USB port**.
-2. Wait for about 10 seconds for it to start and open your PC Web browser at **[http://169.254.1.1](http://169.254.1.1)**
+1. Connect (re-connect) your **RaspiKey** device to the PC **using the middle micro-USB port**. **Attention:** Please make sure that you are using a ***standard (data) micro USB cable*** and not a charging-only one, typically used by portable USB chargers, or your PC will not be abble to communicate with the RaspiKey.
+2. Wait for about 10 seconds for it to start and open your PC Web browser at: **[http://169.254.1.1](http://169.254.1.1)**
 3. Use the displayed configuration page to discover and connect a Bluetooth keyboard to it. Once the keyboard is connected, it will be usable on this PC directly or on anywhere else that you plug RaspiKey to. That is, you do not need to reconfigure RaspiKey to plug it in and use it elsewhere.
 
 
@@ -55,7 +55,6 @@ Known Issues
 ------------
 
 *   The battery level indicator does not work on the Apple Magic (A1644) keyboard.
-*   The Ctrl-LShift-T combination does not work on Apple keyboards, use the Ctrl-RShift-T instead where applicable. This is due to a confirmed hardware issue with the keyboard itself as [also mentioned here](https://github.com/free5lot/hid-apple-patched/issues/6), which is a similar project.
 
 Apple Keyboards Keymap
 ----------------------
