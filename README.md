@@ -154,5 +154,7 @@ Examples:
 RaspiKey is a free and open-source software effort. If you like it and find it useful, please consider donating
 
 [![donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TBM5P9X6GZRCL)
+<br/>
+**Bitcoin:** bc1qjvpnmcsddxshg374k3xumlslcduv3vf4lp9yc7
 
 
