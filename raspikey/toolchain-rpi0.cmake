@@ -1,15 +1,16 @@
 
-set(TOOLCHAIN_BIN "/opt/cross-pi-gcc/bin")
+set(TOOLCHAIN_HOME  "d:/tools/raspberry-gcc")
+set(TOOLCHAIN_BIN "d:/tools/raspberry-gcc/bin")
 set(TOOLCHAIN_HOST "arm-linux-gnueabihf")
-set(TOOLCHAIN_CC "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-gcc")
-set(TOOLCHAIN_CXX "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-g++")
-set(TOOLCHAIN_LD "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-ld")
-set(TOOLCHAIN_AR "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-ar")
-set(TOOLCHAIN_RANLIB "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-ranlib")
-set(TOOLCHAIN_STRIP "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-strip")
-set(TOOLCHAIN_NM "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-nm")
+set(TOOLCHAIN_CC "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-gcc.exe")
+set(TOOLCHAIN_CXX "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-g++.exe")
+set(TOOLCHAIN_LD "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-ld.exe")
+set(TOOLCHAIN_AR "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-ar.exe")
+set(TOOLCHAIN_RANLIB "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-ranlib.exe")
+set(TOOLCHAIN_STRIP "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-strip.exe")
+set(TOOLCHAIN_NM "${TOOLCHAIN_BIN}/${TOOLCHAIN_HOST}-nm.exe")
 
-set(SYSROOT_PATH "/opt/pi-rootfs")
+set(SYSROOT_PATH "d:/tools/raspberry-gcc/arm-linux-gnueabihf/sysroot")
 set(CMAKE_SYSROOT "${SYSROOT_PATH}")
 set(CMAKE_SYSTEM_NAME "Linux")
 set(CMAKE_SYSTEM_PROCESSOR "arm")
@@ -18,8 +19,8 @@ set(CMAKE_CXX_COMPILER ${TOOLCHAIN_CXX})
 set(CMAKE_CROSSCOMPILING TRUE)
 
 set(LIB_DIRS 
-	"/opt/cross-pi-gcc/arm-linux-gnueabihf/lib"
-	"/opt/cross-pi-gcc/lib"
+	"${TOOLCHAIN_HOME}/arm-linux-gnueabihf/lib"
+	"${TOOLCHAIN_HOME}/lib"
 	"${SYSROOT_PATH}/opt/vc/lib"
 	"${SYSROOT_PATH}/lib/${TOOLCHAIN_HOST}"
 	"${SYSROOT_PATH}/usr/local/lib"

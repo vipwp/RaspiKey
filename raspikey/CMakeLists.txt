@@ -13,13 +13,16 @@ aux_source_directory(. SOURCE_LIST)
 aux_source_directory(./bluetooth SOURCE_LIST) 
 aux_source_directory(./gdbus SOURCE_LIST)
 
+set(DENPENS_DIR "D:/codes/RaspiKey/raspikey/raspkey_depens")
+
 # See README.md about mapping the R: drive.
 
 include_directories(
-    ${SYSROOT_PATH}/usr/include/glib-2.0;
-    ${SYSROOT_PATH}/usr/lib/arm-linux-gnueabihf/glib-2.0/include;
-    ${SYSROOT_PATH}/usr/include/dbus-1.0;
-    ${SYSROOT_PATH}/usr/lib/arm-linux-gnueabihf/dbus-1.0/include;
+    ${DENPENS_DIR}/include/glib-2.0;
+    ${DENPENS_DIR}/glib-2.0/include;
+    ${DENPENS_DIR}/include;
+    ${DENPENS_DIR}/include/dbus-1.0;
+    ${DENPENS_DIR}/dbus-1.0/include;
     ${SYSROOT_PATH}/usr/include;
     ${SYSROOT_PATH}/beast_http_server;
 )
@@ -30,9 +33,9 @@ target_link_libraries(raspikey
     #glib-2.0
     #dbus-1
     #boost_system
-	${SYSROOT_PATH}/usr/lib/arm-linux-gnueabihf/libglib-2.0.a
-	${SYSROOT_PATH}/usr/lib/arm-linux-gnueabihf/libdbus-1.a
-	${SYSROOT_PATH}/usr/lib/arm-linux-gnueabihf/libboost_system.a
+	${DENPENS_DIR}/libglib-2.0.a
+	${DENPENS_DIR}/libdbus-1.a
+	${DENPENS_DIR}/libboost_system.a
 )
 
 #target_link_libraries(raspikey -static) # Static linking (causes some libc linking warnings)

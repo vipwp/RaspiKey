@@ -81,7 +81,7 @@ size_t A1644::ProcessInputReport(uint8_t* buf, size_t len)
 		
 	// Eject Pressed?
 	if (inRpt.Special & 0x1)
-		inRpt.Key1 = Globals::HidDel; // Translate to Del
+		inRpt.Key1 = Globals::HidInsert; // Translate to Del
 
 	//Process optional Alt-Cmd swap
 	if (m_Settings.SwapAltCmd)
